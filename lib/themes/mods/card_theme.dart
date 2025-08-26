@@ -1,11 +1,11 @@
-import 'package:e_wms_mobile/constants/color.dart';
+import 'package:e_wms_mobile/utilities/constants/color.dart';
 import 'package:flutter/material.dart';
 
 class AppCardTheme {
   AppCardTheme._();
 
   static final cardLightTheme = CardThemeData(
-    color: ColorConstant.lightBackground,
+    color: AppColors.bgLight,
     surfaceTintColor: Colors.transparent,
     shadowColor: Colors.black12,
     elevation: 4,
@@ -15,7 +15,7 @@ class AppCardTheme {
   );
 
   static final cardDarkTheme = CardThemeData(
-    color: ColorConstant.darkBackground,
+    color: AppColors.bgDark,
     surfaceTintColor: Colors.transparent,
     shadowColor: Colors.black45,
     elevation: 4,

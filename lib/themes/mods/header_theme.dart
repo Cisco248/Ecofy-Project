@@ -1,16 +1,16 @@
-import 'package:e_wms_mobile/constants/color.dart';
+import 'package:e_wms_mobile/utilities/constants/color.dart';
 import 'package:flutter/material.dart';
 
 class AppHeaderTheme {
   AppHeaderTheme._();
 
   static final lightHeaderTheme = AppBarTheme(
-    backgroundColor: ColorConstant.lightBackground,
+    backgroundColor: AppColors.appBgLight,
     // foregroundColor: ColorConstant,
     elevation: 0,
     // scrolledUnderElevation: ,
-    shadowColor: ColorConstant.lightShadowColor,
-    surfaceTintColor: ColorConstant.lightBackground,
+    shadowColor: AppColors.shadowLight,
+    // surfaceTintColor: AppColors.bgLight,
     // shape: ,
     // iconTheme: ,
     // actionsIconTheme: ,
@@ -25,12 +25,12 @@ class AppHeaderTheme {
   );
 
   static final darkHeaderTheme = AppBarTheme(
-    backgroundColor: ColorConstant.darkBackground,
+    backgroundColor: AppColors.bgDark,
     // foregroundColor: ColorConstant,
     elevation: 0,
     // scrolledUnderElevation: ,
-    shadowColor: ColorConstant.darkShadowColor,
-    surfaceTintColor: ColorConstant.darkBackground,
+    shadowColor: AppColors.shadowDark,
+    // surfaceTintColor: ColorConstant.darkBackground,
     // shape: ,
     // iconTheme: ,
     // actionsIconTheme: ,

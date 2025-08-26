@@ -1,6 +1,6 @@
 name: e_wms_mobile
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: any
+  flutter_svg: ^2.2.0
+  provider: any
 
 dev_dependencies:
   test: any
@@ -17,13 +19,21 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: any
 
-
 flutter:
   uses-material-design: true
 
   assets:
-    - lib/images/ravi.jpg
-  #   - images/a_dot_ham.jpeg
+    - path: lib/assets/
+
+    - lib/assets/icons/facebook.svg
+    - lib/assets/icons/x.svg
+    - lib/assets/icons/google.svg
+    - lib/assets/icons/apple.svg
+
+    - lib/assets/images/ravi.jpg
+    - lib/assets/images/Mask_Layer.png
+
+    - lib/assets/logo/logo_l.svg
 
   # fonts:
       # - family: Schuyler

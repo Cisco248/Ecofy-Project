@@ -1,11 +1,14 @@
-import 'package:e_wms_mobile/constants/color.dart';
-import 'package:e_wms_mobile/pages/landing_page.dart';
-import 'package:e_wms_mobile/pages/locate_page.dart';
-import 'package:e_wms_mobile/pages/profile_page.dart';
-import 'package:e_wms_mobile/pages/redeem_page.dart';
-import 'package:e_wms_mobile/pages/token_page.dart';
-import 'package:e_wms_mobile/widgets/navbar_widget.dart';
+import 'package:e_wms_mobile/provider/appbar_provider.dart';
+// import 'package:e_wms_mobile/provider/signing_provider.dart';
+import 'package:e_wms_mobile/screen/pages/landing_page.dart';
+import 'package:e_wms_mobile/screen/pages/locate_page.dart';
+import 'package:e_wms_mobile/screen/pages/profile_page.dart';
+import 'package:e_wms_mobile/screen/pages/redeem_page.dart';
+import 'package:e_wms_mobile/screen/pages/token_page.dart';
+import 'package:e_wms_mobile/screen/widgets/navbar_widget.dart';
+import 'package:e_wms_mobile/utilities/constants/logo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainWrapper extends StatefulWidget {
   const MainWrapper({super.key});
@@ -32,54 +35,42 @@ class _MainWrapperState extends State<MainWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<AppBarProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                spacing: 10,
-                children: [
-                  Container(
-                    width: 64,
-                    height: 64,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Good Morning,',
-                        style: TextStyle(color: ColorConstant.textPrimary),
-                      ),
-                      Text(
-                        'User Name',
-                        style: TextStyle(color: ColorConstant.textPrimary),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  CircleAvatar(backgroundColor: Colors.black, radius: 16),
-                  SizedBox(height: 5),
-                  Text(
-                    'Token: 0',
-                    style: TextStyle(color: ColorConstant.textPrimary),
-                  ),
-                ],
-              ),
-            ],
-          ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 16),
+          child: AppLogo(),
         ),
+        leadingWidth: 75,
+        toolbarHeight: 75,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Row(
+              spacing: 10,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      provider.setGreeting(),
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    Text(
+                      provider.setUsername(),
+                      style: Theme.of(context).textTheme.labelMedium,
+                    ),
+                  ],
+                ),
+                CircleAvatar(
+                  radius: 24,
+                  backgroundImage: AssetImage('lib/assets/images/ravi.jpg'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: navigationLink(),
       bottomNavigationBar: NavBarWidget(
