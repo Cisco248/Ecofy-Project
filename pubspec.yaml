@@ -31,6 +31,10 @@ flutter:
     - lib/assets/icons/apple.svg
 
     - lib/assets/images/ravi.jpg
+    - lib/assets/images/anouncement_banner_1.jpg
+    - lib/assets/images/anouncement_banner_2.jpg
+    - lib/assets/images/goal_banner.png
+    - lib/assets/images/news_banner.jpg
     - lib/assets/images/Mask_Layer.png
 
     - lib/assets/logo/logo_l.svg

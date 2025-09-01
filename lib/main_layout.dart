@@ -1,11 +1,11 @@
 import 'package:e_wms_mobile/provider/appbar_provider.dart';
-// import 'package:e_wms_mobile/provider/signing_provider.dart';
 import 'package:e_wms_mobile/screen/pages/landing_page.dart';
 import 'package:e_wms_mobile/screen/pages/locate_page.dart';
 import 'package:e_wms_mobile/screen/pages/profile_page.dart';
 import 'package:e_wms_mobile/screen/pages/redeem_page.dart';
 import 'package:e_wms_mobile/screen/pages/token_page.dart';
 import 'package:e_wms_mobile/screen/widgets/navbar_widget.dart';
+import 'package:e_wms_mobile/utilities/constants/color.dart';
 import 'package:e_wms_mobile/utilities/constants/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,6 +37,7 @@ class _MainWrapperState extends State<MainWrapper> {
   Widget build(BuildContext context) {
     final provider = Provider.of<AppBarProvider>(context, listen: false);
     return Scaffold(
+      backgroundColor: AppColors.success,
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 16),

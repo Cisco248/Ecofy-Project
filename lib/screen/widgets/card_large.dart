@@ -1,5 +1,4 @@
 import 'package:e_wms_mobile/provider/announce_provider.dart';
-import 'package:e_wms_mobile/utilities/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,39 +19,39 @@ class CardLarge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.cardLight,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 4,
-      margin: const EdgeInsets.all(12),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image Section
             Container(
-              width: 200,
-              height: 200,
+              width: 118,
+              height: 118,
               decoration: BoxDecoration(
                 image: DecorationImage(image: img, fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
             const SizedBox(width: 16),
-
             // Text Section
             Expanded(
               child: Column(
+                textBaseline: TextBaseline.ideographic,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
                     style: Theme.of(context).textTheme.headlineMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 6),
                   Text(
                     description,
                     style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.justify,
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

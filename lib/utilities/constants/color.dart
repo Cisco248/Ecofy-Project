@@ -42,11 +42,11 @@ class AppColors {
   static const Color divider = Color(0xFFBDBDBD);
 
   // Borders
-  static const Color borderLight = primaryDark;
+  static const Color borderLight = Color(0xFF777777);
   static const Color borderLightFocus = primary;
   static const Color borderLightError = error;
 
-  static const Color borderDark = Color(0x7CFFFFFF);
+  static const Color borderDark = Color(0xDFFFFFFF);
   static const Color borderDarkFocus = primary;
   static const Color borderDarkError = error;
 

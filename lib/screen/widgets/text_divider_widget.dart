@@ -7,7 +7,7 @@ class TextDividerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       child: Text(
         text,
         textAlign: TextAlign.start,

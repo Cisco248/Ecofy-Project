@@ -29,7 +29,7 @@ class AppTextStyles {
     ),
     displaySmall: TextStyle(
       fontSize: 24,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w800,
       color: AppColors.txtLight,
     ),
     headlineLarge: TextStyle(

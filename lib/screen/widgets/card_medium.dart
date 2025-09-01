@@ -1,5 +1,5 @@
 import 'package:e_wms_mobile/provider/goal_provider.dart';
-import 'package:e_wms_mobile/utilities/constants/color.dart';
+import 'package:e_wms_mobile/provider/news_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +20,6 @@ class CardMedium extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.cardLight,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 4,
-      margin: const EdgeInsets.all(12),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -31,8 +27,8 @@ class CardMedium extends StatelessWidget {
           children: [
             // Image Section
             Container(
-              width: 60,
-              height: 60,
+              width: 48,
+              height: 48,
               decoration: BoxDecoration(
                 image: DecorationImage(image: img, fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(8),
@@ -47,11 +43,16 @@ class CardMedium extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.labelLarge,
+                    softWrap: true,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     description,
                     style: Theme.of(context).textTheme.bodySmall,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -63,8 +64,8 @@ class CardMedium extends StatelessWidget {
   }
 }
 
-class MediumWidgetExport extends StatelessWidget {
-  const MediumWidgetExport({super.key});
+class GoalWidgetExport extends StatelessWidget {
+  const GoalWidgetExport({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,24 @@ class MediumWidgetExport extends StatelessWidget {
           img: AssetImage(g.image),
           title: g.title,
           description: g.description,
+        );
+      }).toList(),
+    );
+  }
+}
+
+class NewsWidgetExport extends StatelessWidget {
+  const NewsWidgetExport({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<NewsProvider>(context, listen: false);
+    return Column(
+      children: provider.newsList.map((n) {
+        return CardMedium(
+          img: AssetImage(n.image),
+          title: n.title,
+          description: n.description,
         );
       }).toList(),
     );

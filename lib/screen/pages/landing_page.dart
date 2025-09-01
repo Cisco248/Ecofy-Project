@@ -35,9 +35,9 @@ class _LandingBottomState extends State<LandingBottom> {
       child: ListView(
         children: [
           TextDividerWidget(text: 'Goal'),
-          MediumWidgetExport(),
+          GoalWidgetExport(),
           TextDividerWidget(text: 'News'),
-          MediumWidgetExport(),
+          NewsWidgetExport(),
           TextDividerWidget(text: 'Announcement'),
           LargeWidgetExport(),
         ],
