@@ -1,0 +1,52 @@
+import 'package:e_wms_mobile/provider/appbar_provider.dart';
+import 'package:e_wms_mobile/utilities/constants/font.dart';
+import 'package:e_wms_mobile/utilities/constants/logo.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
+
+class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
+  const AppbarWidget({super.key});
+
+  @override
+  Size get preferredSize => const Size.fromHeight(80);
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<AppBarProvider>(context, listen: false);
+    return AppBar(
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 16),
+        child: SvgPicture.asset(whiteLogo),
+      ),
+      leadingWidth: 90,
+      toolbarHeight: 75,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 16.0),
+          child: Row(
+            spacing: 10,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    provider.setGreeting(),
+                    textAlign: TextAlign.end,
+                    style: AppTextStyles.appBarText.titleLarge,
+                  ),
+                  Text(
+                    provider.setUsername(),
+                    textAlign: TextAlign.end,
+                    style: AppTextStyles.appBarText.titleMedium,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
