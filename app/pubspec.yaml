@@ -14,6 +14,7 @@ dependencies:
   flutter_svg: ^2.2.0
   provider: any
   flutter_localization: ^0.3.3
+  http: any
 
 dev_dependencies:
   test: any
@@ -25,22 +26,22 @@ flutter:
   uses-material-design: true
 
   assets:
-    - path: lib/assets/
+    - path: lib/core/assets/
 
-    - lib/assets/icons/facebook.svg
-    - lib/assets/icons/x.svg
-    - lib/assets/icons/google.svg
-    - lib/assets/icons/apple.svg
+    - lib/core/assets/icons/facebook.svg
+    - lib/core/assets/icons/x.svg
+    - lib/core/assets/icons/google.svg
+    - lib/core/assets/icons/apple.svg
 
-    - lib/assets/images/ravi.jpg
-    - lib/assets/images/anouncement_banner_1.jpg
-    - lib/assets/images/anouncement_banner_2.jpg
-    - lib/assets/images/goal_banner.png
-    - lib/assets/images/news_banner.jpg
-    - lib/assets/images/Mask_Layer.png
+    - lib/core/assets/images/ravi.jpg
+    - lib/core/assets/images/anouncement_banner_1.jpg
+    - lib/core/assets/images/anouncement_banner_2.jpg
+    - lib/core/assets/images/goal_banner.png
+    - lib/core/assets/images/news_banner.jpg
+    - lib/core/assets/images/Mask_Layer.png
 
-    - lib/assets/logo/logo_l.svg
-    - lib/assets/logo/white.svg
+    - lib/core/assets/logo/logo_l.svg
+    - lib/core/assets/logo/white.svg
 
   # fonts:
   # - family: Schuyler

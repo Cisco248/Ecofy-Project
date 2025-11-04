@@ -1,9 +1,9 @@
-import 'package:e_wms_mobile/screen/pages/landing_page.dart';
-import 'package:e_wms_mobile/screen/pages/locate_page.dart';
-import 'package:e_wms_mobile/screen/pages/profile_page.dart';
-import 'package:e_wms_mobile/screen/pages/token_page.dart';
-import 'package:e_wms_mobile/screen/widgets/appbar_widget.dart';
-import 'package:e_wms_mobile/screen/widgets/navbar_widget.dart';
+import 'package:e_wms_mobile/presentation/pages/landing_page.dart';
+import 'package:e_wms_mobile/presentation/pages/locate_page.dart';
+import 'package:e_wms_mobile/presentation/pages/profile_page.dart';
+import 'package:e_wms_mobile/presentation/pages/token_page.dart';
+import 'package:e_wms_mobile/presentation/widgets/appbar_widget.dart';
+import 'package:e_wms_mobile/presentation/widgets/navbar_widget.dart';
 import 'package:flutter/material.dart';
 // import 'package:e_wms_mobile/provider/appbar_provider.dart';
 // import 'package:e_wms_mobile/utilities/constants/logo.dart';

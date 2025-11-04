@@ -1,0 +1,19 @@
+from fastapi import FastAPI
+from database.init import Engine
+from models.base import BASE
+from routers import user_router, profile_router
+
+# Initialize database
+BASE.metadata.create_all(bind=Engine)
+
+# Create FastAPI app
+app = FastAPI(title="User Management API", version="1.0.0")
+
+# Include Routers
+app.include_router(user_router.router, prefix="/auth")
+app.include_router(profile_router.router, prefix="/data")
+
+
+@app.get("/")
+def AuthService():
+    return {"message": "Auth Service API"}
