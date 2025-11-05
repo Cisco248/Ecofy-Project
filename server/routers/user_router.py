@@ -12,19 +12,15 @@ router = APIRouter()
 
 @router.post("/signup", status_code=201)
 def signup_user(user: UserCreate, db: Session = Depends(get_db)):
-    # Check if email exists
     existing_user = db.query(UserModel).filter(UserModel.email == user.email).all()
     if existing_user:
         raise HTTPException(status_code=400, detail="Email Already Registered!")
 
-    # Validate password match
     if user.password != user.conpassword:
         raise HTTPException(status_code=400, detail="Passwords Doesn't Match!")
 
-    # Hash password
     hashed_pw = hash_password(user.password)
 
-    # Create new user
     new_user_db = UserModel(
         id=str(uuid.uuid4()),
         fname=user.fname,

@@ -12,9 +12,8 @@ dependencies:
   cupertino_icons: any
   font_awesome_flutter: ^10.10.0
   flutter_svg: ^2.2.0
-  provider: any
-  flutter_localization: ^0.3.3
   http: any
+  fpdart: ^2.0.0-dev.3
 
 dev_dependencies:
   test: any

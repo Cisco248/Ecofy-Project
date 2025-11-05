@@ -16,4 +16,4 @@ app.include_router(profile_router.router, prefix="/data")
 
 @app.get("/")
 def AuthService():
-    return {"message": "Auth Service API"}
+    return {"message": "E-Disposal Government Application API Services"}
