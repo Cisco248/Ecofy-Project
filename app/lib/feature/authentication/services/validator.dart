@@ -8,14 +8,10 @@ class Validator {
   }
 
   String? validateEmail(String email) {
-    if (email == '' || email.trim().isEmpty) {
-      return "Field cannot be empty";
-    } else {
-      if (!email.contains('@')) {
-        return "Enter a valid email address";
-      }
-      return null;
-    }
+    if (email.isEmpty) return 'Email is required';
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+    if (!emailRegex.hasMatch(email)) return "Enter a valid email address";
+    return null;
   }
 
   String? validatePassword(String pwd) {
@@ -28,7 +24,7 @@ class Validator {
         final passwordRegex = RegExp(r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)\$');
         if (passwordRegex.hasMatch(pwd)) {
           return "Password must contain uppercase, lowercase, and a number";
-        } 
+        }
       }
     }
     return null;

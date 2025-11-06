@@ -60,8 +60,10 @@ class AppColors {
   static const Color cardDark = Color(0xFF1B1B1B);
 
   // SnackBars
-  static const Color snackBarSuccess = Color(0xffE2FFF0);
+  static const Color snackBarSuccess = Color.fromARGB(255, 0, 223, 108);
   static const Color snackBarError = Color(0xffFFC4C4);
+  static const Color snackBarWarning = Color(0xFFFF9800);
+  static const Color snackBarInfo = Color(0xFF2196F3);
 
   // Others
   static const Color gray = Color(0x95FFFFFF);

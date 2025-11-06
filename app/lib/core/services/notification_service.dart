@@ -1,64 +1,65 @@
 import 'package:e_wms_mobile/core/constants/color.dart';
 import 'package:flutter/material.dart';
 
+enum NotificationType { success, error, warning, info }
+
 class NotificationService {
-  final String? message;
-  final String? v1;
-  final String? v2;
-  final BuildContext context;
+  // Singleton pattern for better resource management
+  NotificationService._();
+  static final NotificationService instance = NotificationService._();
 
-  NotificationService({
-    required this.message,
-    required this.context,
-    this.v1,
-    this.v2,
-  });
-
-  void signInNotificationSuccess() {
+  // Show notification with type
+  void show({
+    required BuildContext context,
+    required String message,
+    required NotificationType type,
+    Duration duration = const Duration(seconds: 3),
+    SnackBarAction? action,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          '$message',
-          style: Theme.of(context).textTheme.bodyMedium,
+          message,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: AppColors.txtWhite),
         ),
-        backgroundColor: AppColors.snackBarSuccess,
+        backgroundColor: _getColorForType(type),
+        duration: duration,
+        action: action,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }
 
-  void signInNotificationError() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '$message',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        backgroundColor: AppColors.snackBarError,
-      ),
-    );
+  // Convenience methods
+  void showSuccess(BuildContext context, String message) {
+    show(context: context, message: message, type: NotificationType.success);
   }
 
-  void signUpNotificationSuccess() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '$message',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        backgroundColor: AppColors.snackBarError,
-      ),
-    );
+  void showError(BuildContext context, String message) {
+    show(context: context, message: message, type: NotificationType.error);
   }
 
-  void signUpNotificationError() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          '$message',
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        backgroundColor: AppColors.snackBarError,
-      ),
-    );
+  void showWarning(BuildContext context, String message) {
+    show(context: context, message: message, type: NotificationType.warning);
+  }
+
+  void showInfo(BuildContext context, String message) {
+    show(context: context, message: message, type: NotificationType.info);
+  }
+
+  Color _getColorForType(NotificationType type) {
+    switch (type) {
+      case NotificationType.success:
+        return AppColors.snackBarSuccess;
+      case NotificationType.error:
+        return AppColors.snackBarError;
+      case NotificationType.warning:
+        return AppColors.snackBarWarning;
+      case NotificationType.info:
+        return AppColors.snackBarInfo;
+    }
   }
 }

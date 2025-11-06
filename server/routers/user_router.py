@@ -38,7 +38,7 @@ def signup_user(user: UserCreate, db: Session = Depends(get_db)):
     return new_user_db
 
 
-@router.post("/signin")
+@router.post("/signin", status_code=201)
 def signin_user(user: UserLogin, db: Session = Depends(get_db)):
 
     login_user = db.query(UserModel).filter(UserModel.email == user.email).first()
