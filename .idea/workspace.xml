@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="715bc9e1-9bcc-499d-8082-2d9d3a574d35" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/e_wms_mobile.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/e_wms_mobile.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/markdown.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/core/constants/server.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/core/constants/server.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/core/provider/auth_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/models/user_signin_models.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/models/user_signup_models.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/pages/login_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/pages/signup_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/repository/auth_repo.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/schemas/auth_schema.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/services/validator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signin_viewmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signin_viewmodel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signin_viewmodel.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signin_viewmodel.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signup_viewmodel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signup_viewmodel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signup_viewmodel.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/feature/authentication/viewmodel/auth_signup_viewmodel.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/models/daily_task_models.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/pages/home.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/pages/landing_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/providers/landing_provider.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/repository/home_repo.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/schemas/announce_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/schemas/goal_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/schemas/news_model.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/widgets/appbar_widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/widgets/card_large.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/widgets/card_medium.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/landing/widgets/navbar_widget.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/pages/profile_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/repository/profile_repo.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/action_button.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/header_with_avatar.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/info_items.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/info_section.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/loading_shimmer.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/menu_items.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/menu_section.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/feature/profile/widgets/status_widgets.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/main_layout.dart" beforeDir="false" afterPath="$PROJECT_DIR$/app/lib/main_layout.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/helpers/app_failure.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/helpers/exception_helper.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/helpers/token_generator.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/mods/button_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/mods/card_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/mods/header_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/mods/input_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/mods/nav_theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/lib/utilities/themes/theme.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/app/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routers/profile_router.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/routers/user_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/routers/user_router.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Cisco248&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Cisco248/E-Waste-Management-System.git&quot;,
+    &quot;accountId&quot;: &quot;bc9028de-dd48-4cbe-aa42-7e3451d26f74&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="35EAFEm8noyK3wWuLAEgjFEpBsJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "feature",
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="715bc9e1-9bcc-499d-8082-2d9d3a574d35" name="Changes" comment="" />
+      <created>1762664754003</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762664754003</updated>
+    </task>
+    <servers />
+  </component>
+</project>
