@@ -1,0 +1,117 @@
+name: E-Waste Mobile Application CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, feature ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: wms_app
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dart SDK
+        uses: dart-lang/setup-dart@v1
+        
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Dart Code Format
+        run: dart format .
+
+      - name: Verify Dart Formatting
+        run: dart format --output=none --set-exit-if-changed .
+        
+      - name: Analyze Project Source
+        run: flutter analyze
+        
+      # - name: Run Unit Tests
+        # run: flutter test
+
+  build_android:
+    needs: analyze
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: wms_app
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: android-apk
+          path: wms_app/build/app/outputs/flutter-apk/app-release.apk
+        
+      - name: Upload App Bundle Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-appbundle
+          path: wms_app/build/app/outputs/bundle/release/app-release.aab
+
+  Build_ios:
+    needs: analyze
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: wms_app
+
+    steps: 
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build iOS App
+        run: flutter build ios --release --no-codesign
+
+      - name: Upload iOS Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: wms_app/build/ios/iphoneos/Runner.app
