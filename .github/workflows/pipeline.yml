@@ -6,43 +6,48 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: read
+
 jobs:
-  analyze:
+  Application_Analyzer:
+    name: Build and Testing Flutter Application
     runs-on: ubuntu-latest
-    
+      
     defaults:
       run:
         working-directory: wms_app
-    
+      
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+        - name: Checkout Repository
+          uses: actions/checkout@v4
 
-      - name: Install Flutter SDK
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
+        - name: Install Flutter SDK
+          uses: subosito/flutter-action@v2
+          with:
+            channel: stable
 
-      - name: Install Dart SDK
-        uses: dart-lang/setup-dart@v1
-        
-      - name: Install Flutter Dependencies
-        run: flutter pub get
+        - name: Install Dart SDK
+          uses: dart-lang/setup-dart@v1
+          
+        - name: Install Flutter Dependencies
+          run: flutter pub get
 
-      - name: Dart Code Format
-        run: dart format .
+        - name: Dart Code Format
+          run: dart format .
 
-      - name: Verify Dart Formatting
-        run: dart format --output=none --set-exit-if-changed .
-        
-      - name: Analyze Project Source
-        run: flutter analyze
-        
-      # - name: Run Unit Tests
-        # run: flutter test
+        - name: Verify Dart Formatting
+          run: dart format --output=none --set-exit-if-changed .
+          
+        - name: Analyze Project Source
+          run: flutter analyze
+          
+        # - name: Run Unit Tests
+          # run: flutter test
 
-  build_android:
-    needs: analyze
+  Android_Build:
+    name: Build the Android Application
+    needs: Application_Analyzer
     runs-on: ubuntu-latest
 
     defaults:
@@ -86,8 +91,9 @@ jobs:
           name: android-appbundle
           path: wms_app/build/app/outputs/bundle/release/app-release.aab
 
-  Build_ios:
-    needs: analyze
+  iOS_Build:
+    name: Build the iOS Application
+    needs: Application_Analyzer
     runs-on: macos-latest
 
     defaults:
@@ -115,3 +121,37 @@ jobs:
         with:
           name: ios-build
           path: wms_app/build/ios/iphoneos/Runner.app
+
+  Server_App:
+    name: Build and Testing FastAPI Server
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: server
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Lint with flake8
+        run: |
+          # stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      # - name: Test with pytest
+      #   run: |
+      #     pytest
