@@ -39,7 +39,7 @@ jobs:
         run: flutter analyze
         
       # - name: Run Unit Tests
-      #   run: flutter test
+        # run: flutter test
 
   build_android:
     needs: analyze
@@ -66,13 +66,13 @@ jobs:
           channel: stable
 
       - name: Install Dependencies
-        uses: flutter pub get
+        run: flutter pub get
 
       - name: Build Android APK
-        uses: flutter build apk --release
+        run: flutter build apk --release
 
       - name: Build Android App Bundle
-        uses: flutter build appbundle --release
+        run: flutter build appbundle --release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
@@ -108,7 +108,7 @@ jobs:
         run: flutter pub get
 
       - name: Build iOS App
-        uses: flutter build ios --release --no-codesign
+        run: flutter build ios --release --no-codesign
 
       - name: Upload iOS Build Artifact
         uses: actions/upload-artifact@v4
