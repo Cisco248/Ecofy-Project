@@ -7,21 +7,21 @@ on:
     branches: [ master ]
 
 jobs:
-  build_and_test:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix: 
-        os: [ ubuntu-latest, macos-latest, windows-latest ]
-        channel: [ stable ]
+  analyze:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: wms_app
+    
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Install Flutter SDK
         uses: subosito/flutter-action@v2
         with:
-          channel: ${{ matrix.channel }}
+          channel: stable
 
       - name: Install Dart SDK
         uses: dart-lang/setup-dart@v1
@@ -38,5 +38,80 @@ jobs:
       - name: Analyze Project Source
         run: flutter analyze
         
-      # - name: Run Tests
+      # - name: Run Unit Tests
       #   run: flutter test
+
+  build_android:
+    needs: analyze
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: wms_app
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java SDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        uses: flutter pub get
+
+      - name: Build Android APK
+        uses: flutter build apk --release
+
+      - name: Build Android App Bundle
+        uses: flutter build appbundle --release
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with: 
+          name: android-apk
+          path: wms_app/build/app/outputs/flutter-apk/app-release.apk
+        
+      - name: Upload App Bundle Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-appbundle
+          path: wms_app/build/app/outputs/bundle/release/app-release.aab
+
+  Build_ios:
+    needs: analyze
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: wms_app
+
+    steps: 
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Build iOS App
+        uses: flutter build ios --release --no-codesign
+
+      - name: Upload iOS Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-build
+          path: wms_app/build/ios/iphoneos/Runner.app
