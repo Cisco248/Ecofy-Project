@@ -1,0 +1,42 @@
+name: E-Waste Mobile Application CI/CD Pipeline
+
+on:
+  push:
+    branches: [ master, feature ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_and_test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix: 
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+        channel: [ stable ]
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: ${{ matrix.channel }}
+
+      - name: Install Dart SDK
+        uses: dart-lang/setup-dart@v1
+        
+      - name: Install Flutter Dependencies
+        run: flutter pub get
+
+      - name: Dart Code Format
+        run: dart format .
+
+      - name: Verify Dart Formatting
+        run: dart format --output=none --set-exit-if-changed .
+        
+      - name: Analyze Project Source
+        run: flutter analyze
+        
+      # - name: Run Tests
+      #   run: flutter test
