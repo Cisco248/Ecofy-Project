@@ -1,0 +1,21 @@
+  // // Get profile
+  // Future<Either<AppFailure, UserSignInModels>> getProfile(String token) async {
+  //   try {
+  //     final profileRes = await http
+  //         .get(
+  //           Uri.parse('${ServerConstant.serverURL}/auth/'),
+  //           headers: _getHeaders(),
+  //         )
+  //         .timeout(const Duration(seconds: 15));
+
+  //     final resBodyMap = jsonDecode(profileRes.body) as Map<String, dynamic>;
+
+  //     if (profileRes.statusCode != 201) {
+  //       return Left(AppFailure(resBodyMap['detail'] ?? "Connection Error!"));
+  //     }
+
+  //     return Right(UserSignInModels.fromMap(resBodyMap).copyWith(token: token));
+  //   } catch (e) {
+  //     return Left(AppFailure('An unexpected error occurred: ${e.toString()}'));
+  //   }
+  // }
