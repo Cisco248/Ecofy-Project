@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wms_app/core/constants/logo.dart';
-import 'package:wms_app/core/services/notification_service.dart';
-import 'package:wms_app/core/services/validator.dart';
+import 'package:wms_app/utilities/services/notification_service.dart';
+import 'package:wms_app/utilities/services/validator.dart';
 import 'package:wms_app/core/widgets/divider_widget.dart';
 import 'package:wms_app/core/widgets/loader.dart';
 import 'package:wms_app/feature/auth/viewmodels/auth_view_model.dart';

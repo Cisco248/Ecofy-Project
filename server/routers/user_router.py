@@ -56,11 +56,11 @@ def signin_user(user: UserLogin, db: Session = Depends(get_db)):
     return {"token": token, "user": login_user}
 
 
-@router.get("/")
+@router.get("/profile", status_code=200)
 def current_user_data(
-    db: Session = Depends(get_db),
-    user_dict=Depends(auth_middleware),
+    db: Session = Depends(get_db), user_dict=Depends(auth_middleware)
 ):
+
     user = db.query(UserModel).filter(UserModel.id == user_dict["uid"]).first()
 
     if not user:

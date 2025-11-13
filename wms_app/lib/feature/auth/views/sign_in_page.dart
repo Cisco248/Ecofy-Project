@@ -4,8 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:wms_app/core/constants/font.dart';
 import 'package:wms_app/core/constants/size.dart';
 import 'package:wms_app/core/constants/text.dart';
-import 'package:wms_app/core/services/notification_service.dart';
-import 'package:wms_app/core/services/validator.dart';
+import 'package:wms_app/main_layout.dart';
+import 'package:wms_app/utilities/services/notification_service.dart';
+import 'package:wms_app/utilities/services/validator.dart';
 import 'package:wms_app/core/widgets/custom_button.dart';
 import 'package:wms_app/core/widgets/initial_appbar.dart';
 import 'package:wms_app/core/widgets/loader.dart';
@@ -50,7 +51,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Text('Home Page')),
+            MaterialPageRoute(builder: (context) => MainWrapper()),
           );
         },
         error: (error, st) {
