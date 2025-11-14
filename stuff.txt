@@ -19,3 +19,234 @@
   //     return Left(AppFailure('An unexpected error occurred: ${e.toString()}'));
   //   }
   // }
+
+    // ========== TOKEN INFO ==========
+  // Future<Result<TokenInfoModel>> getTokenInfo() async {
+  //   try {
+  //     final response = await client.get(
+  //       Uri.parse('$baseUrl/token-info'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final tokenInfo = TokenInfoModel.fromJson(json['data'] ?? json);
+  //       return Result.success(tokenInfo);
+  //     } else if (response.statusCode == 401) {
+  //       return Result.failure('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Result.failure(json['message'] ?? 'Failed to fetch token info');
+  //     }
+  //   } on SocketException {
+  //     return Result.failure('No internet connection');
+  //   } on HttpException {
+  //     return Result.failure('Server error occurred');
+  //   } on FormatException {
+  //     return Result.failure('Invalid response format');
+  //   } catch (e) {
+  //     return Result.failure('An unexpected error occurred: $e');
+  //   }
+  // }
+
+    // // ========== ADDITIONAL INFO ==========
+  // Future<Result<List<AdditionalInfoModel>>> getAdditionalInfo() async {
+  //   try {
+  //     final response = await client.get(
+  //       Uri.parse('$baseUrl/additional-info'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final info = (json['data'] as List)
+  //           .map((item) => AdditionalInfoModel.fromJson(item))
+  //           .toList();
+  //       return Result.success(info);
+  //     } else if (response.statusCode == 401) {
+  //       return Result.failure('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Result.failure(
+  //         json['message'] ?? 'Failed to fetch additional info',
+  //       );
+  //     }
+  //   } on SocketException {
+  //     return Result.failure('No internet connection');
+  //   } on HttpException {
+  //     return Result.failure('Server error occurred');
+  //   } on FormatException {
+  //     return Result.failure('Invalid response format');
+  //   } catch (e) {
+  //     return Result.failure('An unexpected error occurred: $e');
+  //   }
+  // }
+
+
+
+  // void dispose() {
+  //   client.close();
+  // }
+
+    // ========== GET ALL DASHBOARD DATA ==========
+  // Future<Result<LandingDashboardModel>> getDashboardData() async {
+  //   try {
+  //     final response = await client.get(
+  //       Uri.parse('$baseUrl/dashboard'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final dashboard = LandingDashboardModel.fromJson(json['data'] ?? json);
+  //       return Result.success(dashboard);
+  //     } else if (response.statusCode == 401) {
+  //       return Result.failure('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Result.failure(
+  //         json['message'] ?? 'Failed to fetch dashboard data',
+  //       );
+  //     }
+  //   } on SocketException {
+  //     return Result.failure('No internet connection');
+  //   } on HttpException {
+  //     return Result.failure('Server error occurred');
+  //   } on FormatException {
+  //     return Result.failure('Invalid response format');
+  //   } catch (e) {
+  //     return Result.failure('An unexpected error occurred: $e');
+  //   }
+  // }
+
+    // Future<Either> getNewsById(String newsId) async {
+  //   try {
+  //     final response = await client.get(
+  //       Uri.parse('$baseUrl/daily-news/$newsId'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final news = DailyNewsModels.fromJson(json['data'] ?? json);
+  //       return Right(news);
+  //     } else if (response.statusCode == 401) {
+  //       return Left('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Left(json['message'] ?? 'Failed to fetch news details');
+  //     }
+  //   } on SocketException {
+  //     return Left('No internet connection');
+  //   } on HttpException {
+  //     return Left('Server error occurred');
+  //   } on FormatException {
+  //     return Left('Invalid response format');
+  //   } catch (e) {
+  //     return Left('An unexpected error occurred: $e');
+  //   }
+  // }
+
+  // Future<Either> markNewsAsRead(String newsId) async {
+  //   try {
+  //     final response = await client.post(
+  //       Uri.parse('$baseUrl/daily-news/$newsId/mark-read'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       return Right(true);
+  //     } else if (response.statusCode == 401) {
+  //       return Left('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Left(json['message'] ?? 'Failed to mark news as read');
+  //     }
+  //   } on SocketException {
+  //     return Left('No internet connection');
+  //   } on HttpException {
+  //     return Left('Server error occurred');
+  //   } catch (e) {
+  //     return Left('An unexpected error occurred: $e');
+  //   }
+  // }
+
+    /// Fetches a weekly announcement by its ID.
+  ///
+  /// This method sends a GET request to the server to retrieve the details
+  /// of a specific weekly announcement using the provided [announcementId].
+  ///
+  /// Returns:
+  /// - `Right<WeeklyAnnouncementModels>`: If the request is successful and the announcement details are retrieved.
+  ///
+  /// - `Left<String>`: If an error occurs, such as:
+  ///   - Unauthorized access (status code 401).
+  ///   - Server-side error with a message from the response.
+  ///   - No internet connection.
+  ///   - Server error.
+  ///   - Invalid response format.
+  ///   - Any unexpected error.
+  ///
+  /// Exceptions:
+  /// - Handles `SocketException` for network issues.
+  /// - Handles `HttpException` for server-related issues.
+  /// - Handles `FormatException` for invalid response formats.
+  /// - Catches any other unexpected exceptions.
+  // Future<Either> getAnnouncementById(String announcementId) async {
+  //   try {
+  //     final response = await client.get(
+  //       Uri.parse('$baseUrl/weekly-announcements/$announcementId'),
+  //       headers: _getHeaders(),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final announcement = WeeklyAnnouncementModels.fromJson(
+  //         json['data'] ?? json,
+  //       );
+  //       return Right(announcement);
+  //     } else if (response.statusCode == 401) {
+  //       return Left('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Left(json['message'] ?? 'Failed to fetch announcement details');
+  //     }
+  //   } on SocketException {
+  //     return Left('No internet connection');
+  //   } on HttpException {
+  //     return Left('Server error occurred');
+  //   } on FormatException {
+  //     return Left('Invalid response format');
+  //   } catch (e) {
+  //     return Left('An unexpected error occurred: $e');
+  //   }
+  // }
+
+    // Future<Either> updateTaskStatus(String taskId, String status) async {
+  //   try {
+  //     final response = await client.patch(
+  //       Uri.parse('$baseUrl/daily-tasks/$taskId/status'),
+  //       headers: _getHeaders(),
+  //       body: jsonEncode({'status': status}),
+  //     );
+
+  //     if (response.statusCode == 200) {
+  //       final json = jsonDecode(response.body);
+  //       final task = DailyTaskModel.fromJson(json['data'] ?? json);
+  //       return Right(task);
+  //     } else if (response.statusCode == 401) {
+  //       return Left('Unauthorized. Please login again.');
+  //     } else {
+  //       final json = jsonDecode(response.body);
+  //       return Left(json['message'] ?? 'Failed to update task status');
+  //     }
+  //   } on SocketException {
+  //     return Left('No internet connection');
+  //   } on HttpException {
+  //     return Left('Server error occurred');
+  //   } on FormatException {
+  //     return Left('Invalid response format');
+  //   } catch (e) {
+  //     return Left('An unexpected error occurred: $e');
+  //   }
+  // }

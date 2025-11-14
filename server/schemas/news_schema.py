@@ -1,7 +1,8 @@
+from datetime import datetime
 from pydantic import BaseModel
 
 
 class NewsSchema(BaseModel):
     title: str
     description: str
-    due_date: str
+    due_date: datetime

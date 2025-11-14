@@ -3,7 +3,7 @@ import 'package:wms_app/core/widgets/navbar_widget.dart';
 import 'package:wms_app/feature/discover/views/locate_page.dart';
 import 'package:wms_app/feature/profile/views/profile_page.dart';
 import 'package:wms_app/feature/token/views/token_page.dart';
-import 'feature/landing/pages/landing_page.dart';
+import 'feature/landing/views/landing_page.dart';
 import 'package:flutter/material.dart';
 
 class MainWrapper extends StatefulWidget {

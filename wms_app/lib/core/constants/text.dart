@@ -14,3 +14,12 @@ const String signInTextFailed = 'Failed, Unavailable User!';
 
 final String emailHintText = 'E.g: johndoe@example.com';
 final String passwordHintText = 'E.g: ***********';
+
+// Exception Error Text
+class ExceptionText {
+  final error401 = 'Error: Unauthorized. Please login again.';
+  final socExcep = 'Error: No Internet Connection!';
+  final httpExcep = 'Error: Server Error Occurred!';
+  final forExcep = 'Error: Invalid Format Error!';
+  final defaultExcep = 'Error: ';
+}

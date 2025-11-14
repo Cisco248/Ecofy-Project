@@ -37,8 +37,8 @@ def post_task(task: TaskSchema, db: Session = Depends(get_db)):
 
 
 @router.get("/task-data", status_code=200, response_model=list[TaskSchema])
-def task_api_router(db: Session = Depends(get_db), limit: int = 5):
-    task_query = db.query(NewsModel).limit(limit).all()
+def task_api_router(db: Session = Depends(get_db)):
+    task_query = db.query(TaskModel).all()
     if not task_query:
         raise HTTPException(status_code=400, detail="Task doesn't added!")
     return task_query
@@ -47,8 +47,8 @@ def task_api_router(db: Session = Depends(get_db), limit: int = 5):
 @router.post("/news-data", status_code=200)
 def post_news(news: NewsSchema, db: Session = Depends(get_db)):
     exist_news = db.query(NewsModel).filter(NewsModel.title == news.title).first()
-    if not exist_news:
-        raise HTTPException(status_code=404, detail="News already added!")
+    if exist_news:
+        raise HTTPException(status_code=400, detail="News already added!")
 
     news_news_db = NewsModel(
         id=str(uuid.uuid4()),
@@ -80,10 +80,10 @@ def post_announce(announce: AnnouncementSchema, db: Session = Depends(get_db)):
         .filter(AnnouncementModel.title == announce.title)
         .first()
     )
-    if not exist_announce:
-        raise HTTPException(status_code=404, detail="Announcement already added!")
+    if exist_announce:
+        raise HTTPException(status_code=400, detail="Announcement already added!")
 
-    news_announce_db = NewsModel(
+    news_announce_db = AnnouncementModel(
         id=str(uuid.uuid4()),
         title=announce.title,
         description=announce.description,

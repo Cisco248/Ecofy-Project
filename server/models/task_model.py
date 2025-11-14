@@ -1,7 +1,5 @@
 import datetime
-from uuid import uuid4
-import uuid
-from sqlalchemy import UUID, Column, String, DateTime
+from sqlalchemy import Column, String, DateTime
 from models.base import BASE
 
 
