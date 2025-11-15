@@ -30,9 +30,9 @@ class ProfileRemoteRepository {
         return Left(AppFailure("Error: $userDecode"));
       }
 
-      if (kDebugMode) {
-        debugPrint("Reponse: $userDecode");
-      }
+      // if (kDebugMode) {
+      //   debugPrint("Reponse: $userDecode");
+      // }
 
       return Right(ProfileModel.fromMap(userDecode));
     } catch (e) {

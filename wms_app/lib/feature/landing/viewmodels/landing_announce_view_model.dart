@@ -1,8 +1,9 @@
+// ignore_for_file: only_use_keep_alive_inside_keep_alive
 import 'package:fpdart/fpdart.dart';
+import 'package:wms_app/utilities/helpers/app_failure.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/announce_model.dart';
 import 'package:wms_app/feature/landing/repository/landing_repository.dart';
-import 'package:wms_app/utilities/helpers/app_failure.dart';
 
 part 'landing_announce_view_model.g.dart';
 
@@ -11,13 +12,12 @@ class LandingAnnounceViewModel extends _$LandingAnnounceViewModel {
   late LandingRepository _landingRepository;
 
   @override
-  AsyncValue<AnnounceModel>? build() {
-    // ignore: only_use_keep_alive_inside_keep_alive
+  AsyncValue<List<AnnounceModel>>? build() {
     _landingRepository = ref.watch(landingRepositoryProvider);
     return null;
   }
 
-  Future<AnnounceModel?> getNewsData() async {
+  Future<List<AnnounceModel>?> getAnnounceData() async {
     try {
       state = AsyncValue.loading();
 

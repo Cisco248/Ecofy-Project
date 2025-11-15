@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class CardMedium extends StatelessWidget {
   const CardMedium({
     super.key,
-    required this.img,
+    this.img,
     required this.title,
     required this.description,
     this.child,
   });
 
-  final ImageProvider img;
+  final ImageProvider? img;
   final String title;
   final String description;
   final Widget? child;
@@ -27,7 +27,7 @@ class CardMedium extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                image: DecorationImage(image: img, fit: BoxFit.cover),
+                image: DecorationImage(image: img!, fit: BoxFit.cover),
                 borderRadius: BorderRadius.circular(8),
               ),
             ),

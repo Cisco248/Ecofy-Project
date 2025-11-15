@@ -13,7 +13,8 @@ part of 'landing_news_view_model.dart';
 const landingNewsViewModelProvider = LandingNewsViewModelProvider._();
 
 final class LandingNewsViewModelProvider
-    extends $NotifierProvider<LandingNewsViewModel, AsyncValue<NewsModel>?> {
+    extends
+        $NotifierProvider<LandingNewsViewModel, AsyncValue<List<NewsModel>>?> {
   const LandingNewsViewModelProvider._()
     : super(
         from: null,
@@ -33,31 +34,35 @@ final class LandingNewsViewModelProvider
   LandingNewsViewModel create() => LandingNewsViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AsyncValue<NewsModel>? value) {
+  Override overrideWithValue(AsyncValue<List<NewsModel>>? value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AsyncValue<NewsModel>?>(value),
+      providerOverride: $SyncValueProvider<AsyncValue<List<NewsModel>>?>(value),
     );
   }
 }
 
 String _$landingNewsViewModelHash() =>
-    r'5107052afd4c616ca5436ede7e5cc9540a9483be';
+    r'833a98d9ea18fc9140b089186973d07fb97405ea';
 
 abstract class _$LandingNewsViewModel
-    extends $Notifier<AsyncValue<NewsModel>?> {
-  AsyncValue<NewsModel>? build();
+    extends $Notifier<AsyncValue<List<NewsModel>>?> {
+  AsyncValue<List<NewsModel>>? build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
     final ref =
-        this.ref as $Ref<AsyncValue<NewsModel>?, AsyncValue<NewsModel>?>;
+        this.ref
+            as $Ref<AsyncValue<List<NewsModel>>?, AsyncValue<List<NewsModel>>?>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<NewsModel>?, AsyncValue<NewsModel>?>,
-              AsyncValue<NewsModel>?,
+              AnyNotifier<
+                AsyncValue<List<NewsModel>>?,
+                AsyncValue<List<NewsModel>>?
+              >,
+              AsyncValue<List<NewsModel>>?,
               Object?,
               Object?
             >;

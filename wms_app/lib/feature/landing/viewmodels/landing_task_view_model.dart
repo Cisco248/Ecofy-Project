@@ -1,3 +1,4 @@
+// ignore_for_file: only_use_keep_alive_inside_keep_alive
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/task_model.dart';
@@ -10,13 +11,12 @@ class LandingTaskViewModel extends _$LandingTaskViewModel {
   late LandingRepository _landingRepository;
 
   @override
-  AsyncValue<TaskModel>? build() {
-    // ignore: only_use_keep_alive_inside_keep_alive
+  AsyncValue<List<TaskModel>>? build() {
     _landingRepository = ref.watch(landingRepositoryProvider);
     return null;
   }
 
-  Future<TaskModel?> getTaskData() async {
+  Future<List<TaskModel>?> getTaskData() async {
     try {
       state = AsyncValue.loading();
 

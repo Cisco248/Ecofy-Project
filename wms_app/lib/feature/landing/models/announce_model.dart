@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 class AnnounceModel {
   String? id;
   String? title;
@@ -37,31 +34,44 @@ class AnnounceModel {
       'id': id,
       'title': title,
       'description': description,
-      'dueDate': dueDate,
-      'createdAt': createdAt,
+      'due_date': dueDate,
+      'created_at': createdAt,
     };
   }
 
   factory AnnounceModel.fromMap(Map<String, dynamic> map) {
     return AnnounceModel(
-      id: map['id'] != null ? map['id'] as String : null,
-      title: map['title'] != null ? map['title'] as String : null,
-      description: map['description'] != null
-          ? map['description'] as String
-          : null,
-      dueDate: map['dueDate'] != null ? map['dueDate'] as String : null,
-      createdAt: map['createdAt'] != null ? map['createdAt'] as String : null,
+      id: map['id'] ?? '',
+      title: map['title'] ?? '',
+      description: map['description'] ?? '',
+      dueDate: map['due_date'] ?? '',
+      createdAt: map['created_at'] ?? '',
     );
   }
 
-  String toJson() => json.encode(toMap());
+  factory AnnounceModel.fromJson(json) {
+    return AnnounceModel(
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      dueDate: json['due_date'] ?? '',
+      createdAt: json['created_at'] ?? '',
+    );
+  }
 
-  factory AnnounceModel.fromJson(String source) =>
-      AnnounceModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'due_date': dueDate,
+      'created_at': createdAt,
+    };
+  }
 
   @override
   String toString() {
-    return 'AnnounceModel(id: $id, title: $title, description: $description, dueDate: $dueDate, createdAt: $createdAt)';
+    return 'AnnounceModel(id: $id, title: $title, description: $description, due_date: $dueDate, created_at: $createdAt)';
   }
 
   @override
@@ -82,5 +92,19 @@ class AnnounceModel {
         description.hashCode ^
         dueDate.hashCode ^
         createdAt.hashCode;
+  }
+}
+
+class AnnounceResponse {
+  final List<AnnounceModel> data;
+
+  AnnounceResponse({required this.data});
+
+  factory AnnounceResponse.fromJson(dynamic json) {
+    var list = json as List;
+    List<AnnounceModel> taskList = list
+        .map((i) => AnnounceModel.fromJson(i))
+        .toList();
+    return AnnounceResponse(data: taskList);
   }
 }

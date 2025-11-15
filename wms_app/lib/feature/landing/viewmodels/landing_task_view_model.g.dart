@@ -13,7 +13,8 @@ part of 'landing_task_view_model.dart';
 const landingTaskViewModelProvider = LandingTaskViewModelProvider._();
 
 final class LandingTaskViewModelProvider
-    extends $NotifierProvider<LandingTaskViewModel, AsyncValue<TaskModel>?> {
+    extends
+        $NotifierProvider<LandingTaskViewModel, AsyncValue<List<TaskModel>>?> {
   const LandingTaskViewModelProvider._()
     : super(
         from: null,
@@ -33,31 +34,35 @@ final class LandingTaskViewModelProvider
   LandingTaskViewModel create() => LandingTaskViewModel();
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(AsyncValue<TaskModel>? value) {
+  Override overrideWithValue(AsyncValue<List<TaskModel>>? value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<AsyncValue<TaskModel>?>(value),
+      providerOverride: $SyncValueProvider<AsyncValue<List<TaskModel>>?>(value),
     );
   }
 }
 
 String _$landingTaskViewModelHash() =>
-    r'74518f50f30b9bdc9c868b97d178ef6dbd41f9f1';
+    r'8fadda3b3c3ec2bfb9723562324bd3c00996a7d0';
 
 abstract class _$LandingTaskViewModel
-    extends $Notifier<AsyncValue<TaskModel>?> {
-  AsyncValue<TaskModel>? build();
+    extends $Notifier<AsyncValue<List<TaskModel>>?> {
+  AsyncValue<List<TaskModel>>? build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
     final ref =
-        this.ref as $Ref<AsyncValue<TaskModel>?, AsyncValue<TaskModel>?>;
+        this.ref
+            as $Ref<AsyncValue<List<TaskModel>>?, AsyncValue<List<TaskModel>>?>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<TaskModel>?, AsyncValue<TaskModel>?>,
-              AsyncValue<TaskModel>?,
+              AnyNotifier<
+                AsyncValue<List<TaskModel>>?,
+                AsyncValue<List<TaskModel>>?
+              >,
+              AsyncValue<List<TaskModel>>?,
               Object?,
               Object?
             >;

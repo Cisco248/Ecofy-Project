@@ -1,16 +1,15 @@
-// lib/features/landing/data/repositories/landing_repository.dart
-import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/foundation.dart';
+import 'dart:convert';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:wms_app/core/constants/server.dart';
+import 'package:flutter/foundation.dart';
 import 'package:wms_app/core/constants/text.dart';
+import 'package:wms_app/core/constants/server.dart';
+import 'package:wms_app/utilities/helpers/app_failure.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/news_model.dart';
 import 'package:wms_app/feature/landing/models/task_model.dart';
 import 'package:wms_app/feature/landing/models/announce_model.dart';
-import 'package:wms_app/utilities/helpers/app_failure.dart';
 
 part 'landing_repository.g.dart';
 
@@ -20,58 +19,52 @@ LandingRepository landingRepository(Ref ref) {
 }
 
 class LandingRepository {
-  final serUrl = ServerConstant.serverURL;
-  final serConst = ServerConstant();
   final serExcep = ExceptionText();
 
-  /// Fetches the daily tasks for the current user from the server.
+  /// ---------------------------------------------------------------------------
+  /// Fetch Daily Tasks
+  /// ---------------------------------------------------------------------------
   ///
-  /// This method retrieves a paginated list of daily tasks by making a GET request to the `/tasks-data` endpoint.
+  /// Retrieves the daily tasks for the authenticated user.
   ///
-  /// Returns:
-  ///   A [Future] that resolves to an [Either] object containing:
-  ///   - `Right(DailyTasksModels.fromList(value))`: A list of daily tasks on success.
-  ///   - `Left(AppFailure(String))`: An error message describing the failure reason.
+  /// Makes a `GET` request to **/task-data** and returns a parsed list of
+  /// `TaskModel` inside an `Either<AppFailure, List<TaskModel>>`.
   ///
-  /// Possible error cases:
-  ///   - `Unauthorized. Please login again.`: HTTP 401 status code.
-  ///   - `No internet connection`: [SocketException] thrown (network unavailable).
-  ///   - `Server error occurred`: [HttpException] thrown (server-side error).
-  ///   - `Invalid response format`: [FormatException] thrown (malformed response).
-  ///   - `An unexpected error occurred: $e`: Any other default exception.
-  ///   - Server-returned error message or `Failed to fetch daily tasks` for other HTTP errors.
+  /// **Success:**
+  ///   Returns `Right(List<TaskModel>)`.
   ///
-  /// Return Type Example:
-  ///   ```dart
-  ///    final value = switch(response) {
-  ///     Left(value: final failure) => failure,
-  ///     Right(value: final success) => success,
-  ///   }
-  ///   ```
-  Future<Either<AppFailure, TaskModel>> getDailyTasks() async {
+  /// **Failure:**
+  /// - 401 Unauthorized → requires re-login
+  /// - SocketException → No internet
+  /// - HttpException → Server-side error
+  /// - FormatException → Malformed JSON
+  /// - Any other errors wrapped with a default message
+  ///
+  /// Example usage:
+  /// ```dart
+  /// final result = await ref.read(landingRepositoryProvider).getDailyTasks();
+  /// ```
+  Future<Either<AppFailure, List<TaskModel>>> getDailyTasks() async {
     try {
       final taskRes = await http.get(
-        Uri.parse('$serUrl/task-data'),
-        headers: serConst.getHeaders(),
+        Uri.parse('${ServerConstant.serverURL}/task-data'),
+        headers: ServerConstant.getHeaders(),
       );
 
       final json = jsonDecode(taskRes.body);
 
       if (taskRes.statusCode == 200) {
-        // ignore: unused_local_variable
-        final tasksList = (json['data'] as List)
-            .map((task) => TaskModel.fromJson(task))
-            .toList();
+        TaskResponse taskResponse = TaskResponse.fromJson(json);
+
         if (kDebugMode) {
-          print("Response: ${tasksList.toString()}");
+          print('Tasks Length: ${taskResponse.data.length}');
+          print('Task List: ${taskResponse.data}');
         }
-        return Right(TaskModel.fromJson(tasksList as Map<String, dynamic>));
-      } else if (taskRes.statusCode == 401) {
-        return Left(AppFailure(serExcep.error401));
-      } else {
-        final json = jsonDecode(taskRes.body);
-        return Left(AppFailure(serExcep.defaultExcep + json['detail']));
+
+        return Right(taskResponse.data);
       }
+
+      return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));
     } on SocketException {
       return Left(AppFailure(serExcep.socExcep));
     } on HttpException {
@@ -79,55 +72,53 @@ class LandingRepository {
     } on FormatException {
       return Left(AppFailure(serExcep.forExcep));
     } catch (e) {
-      return Left(AppFailure(serExcep.defaultExcep + e.toString()));
+      return Left(AppFailure('${serExcep.defaultExcep} ${e.toString()}'));
     }
   }
 
-  /// Fetches the daily news for the current user from the server.
+  /// ---------------------------------------------------------------------------
+  /// Fetch Daily News
+  /// ---------------------------------------------------------------------------
   ///
-  /// This method retrieves a paginated list of daily news by making a GET request to the `/news-data` endpoint.
+  /// Retrieves the latest news articles for the user.
   ///
-  /// Returns:
-  ///   A [Future] that resolves to an [Either] object containing:
-  ///   - `Right(DailyNewsModels.fromList(value))`: A list of daily tasks on success.
-  ///   - `Left(AppFailure(String))`: An error message describing the failure reason.
+  /// Makes a `GET` request to **/news-data** and returns a parsed `NewsModel`
+  /// inside an `Either<AppFailure, NewsModel>`.
   ///
-  /// Possible error cases:
-  ///   - `Unauthorized. Please login again.`: HTTP 401 status code.
-  ///   - `No internet connection`: [SocketException] thrown (network unavailable).
-  ///   - `Server error occurred`: [HttpException] thrown (server-side error).
-  ///   - `Invalid response format`: [FormatException] thrown (malformed response).
-  ///   - `An unexpected error occurred: $e`: Any other default exception.
-  ///   - Server-returned error message or `Failed to fetch daily news` for other HTTP errors.
+  /// **Success:**
+  ///   Returns `Right(List<NewsModel>)`.
   ///
-  /// Return Type Example:
-  ///   ```dart
-  ///    final value = switch(response) {
-  ///     Left(value: final failure) => failure,
-  ///     Right(value: final success) => success,
-  ///   }
-  ///   ```
-  Future<Either<AppFailure, NewsModel>> getDailyNews() async {
+  /// **Failure:**
+  /// - 401 Unauthorized → requires re-login
+  /// - SocketException → No internet
+  /// - HttpException → Server-side error
+  /// - FormatException → Malformed JSON
+  /// - Any other errors wrapped with a default message
+  ///
+  /// Example usage:
+  /// ```dart
+  /// final result = await ref.read(landingRepositoryProvider).getDailyNews();
+  /// ```
+  Future<Either<AppFailure, List<NewsModel>>> getDailyNews() async {
     try {
       final newsRes = await http.get(
-        Uri.parse('$serUrl/news-data'),
-        headers: serConst.getHeaders(),
+        Uri.parse('${ServerConstant.serverURL}/news-data'),
+        headers: ServerConstant.getHeaders(),
       );
 
       final json = jsonDecode(newsRes.body);
 
       if (newsRes.statusCode == 200) {
-        // ignore: unused_local_variable
-        final newsList = (json['data'] as List)
-            .map((news) => NewsModel.fromJson(news))
-            .toList();
-        return Right(NewsModel.fromJson(json));
-      } else if (newsRes.statusCode == 401) {
-        return Left(AppFailure(serExcep.error401));
-      } else {
-        final json = jsonDecode(newsRes.body);
-        return Left(AppFailure(serExcep.defaultExcep + json['detail']));
+        NewsResponse newsResponse = NewsResponse.fromJson(json);
+
+        if (kDebugMode) {
+          print('News Length: ${newsResponse.data.length}');
+          print('News List: ${newsResponse.data}');
+        }
+
+        return Right(newsResponse.data);
       }
+      return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));
     } on SocketException {
       return Left(AppFailure(serExcep.socExcep));
     } on HttpException {
@@ -135,56 +126,54 @@ class LandingRepository {
     } on FormatException {
       return Left(AppFailure(serExcep.forExcep));
     } catch (e) {
-      return Left(AppFailure(serExcep.defaultExcep + e.toString()));
+      return Left(AppFailure('${serExcep.defaultExcep} ${e.toString()}'));
     }
   }
 
-  /// Fetches weekly announcement from the server with pagination support.
+  /// ---------------------------------------------------------------------------
+  /// Fetch Weekly Announcements
+  /// ---------------------------------------------------------------------------
   ///
-  /// This method retrieves a paginated list of daily news articles by making
-  /// a GET request to the `/announce-data` endpoint.
+  /// Retrieves weekly announcements.
   ///
-  /// Returns:
-  ///   A [Future] that resolves to an [Either] object containing:
-  ///   - `Right(WeeklyAnnouncementModels.formList(value))`: A list of weekly announcement on success.
-  ///   - `Left(AppFailure(String))`: An error message describing the failure reason.
+  /// Makes a `GET` request to **/announce-data** and returns a parsed
+  /// `AnnounceModel` inside an `Either<AppFailure, AnnounceModel>`.
   ///
-  /// Possible error cases:
-  ///   - `Unauthorized. Please login again.`: HTTP 401 status code.
-  ///   - `No internet connection`: [SocketException] thrown (network unavailable).
-  ///   - `Server error occurred`: [HttpException] thrown (server-side error).
-  ///   - `Invalid response format`: [FormatException] thrown (malformed response).
-  ///   - `An unexpected error occurred: $e`: Any other default exception.
-  ///   - Server-returned error message or `Failed to fetch weekly announcement` for other HTTP errors.
+  /// **Success:**
+  ///   Returns `Right(List<AnnounceModel>)`.
   ///
-  /// Return Type Example:
-  ///   ```dart
-  ///   final value = switch(response) {
-  ///     Left(value: final failure) => failure,
-  ///     Right(value: final success) => success,
-  ///   }
-  ///   ```
-  Future<Either<AppFailure, AnnounceModel>> getWeeklyAnnouncements() async {
+  /// **Failure:**
+  /// - 401 Unauthorized → requires re-login
+  /// - SocketException → No internet
+  /// - HttpException → Server-side error
+  /// - FormatException → Malformed JSON
+  /// - Any other errors wrapped with a default message
+  ///
+  /// Example usage:
+  /// ```dart
+  /// final result = await ref.read(landingRepositoryProvider).getWeeklyAnnouncements();
+  /// ```
+  Future<Either<AppFailure, List<AnnounceModel>>>
+  getWeeklyAnnouncements() async {
     try {
       final announceRes = await http.get(
-        Uri.parse('$serUrl/announce-data'),
-        headers: serConst.getHeaders(),
+        Uri.parse('${ServerConstant.serverURL}/announce-data'),
+        headers: ServerConstant.getHeaders(),
       );
 
       final json = jsonDecode(announceRes.body);
 
       if (announceRes.statusCode == 200) {
-        // ignore: unused_local_variable
-        final announceList = (json['data'] as List)
-            .map((item) => AnnounceModel.fromJson(item))
-            .toList();
-        return Right(AnnounceModel.fromJson(json));
-      } else if (announceRes.statusCode == 401) {
-        return Left(AppFailure(serExcep.error401));
-      } else {
-        final json = jsonDecode(announceRes.body);
-        return Left(AppFailure(serExcep.defaultExcep + json['message']));
+        if (kDebugMode) {
+          print(
+            'Announce Length: ${AnnounceResponse.fromJson(json).data.length}',
+          );
+          print('Announce List: ${AnnounceResponse.fromJson(json).data}');
+        }
+
+        return Right(AnnounceResponse.fromJson(json).data);
       }
+      return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));
     } on SocketException {
       return Left(AppFailure(serExcep.socExcep));
     } on HttpException {
@@ -192,7 +181,7 @@ class LandingRepository {
     } on FormatException {
       return Left(AppFailure(serExcep.forExcep));
     } catch (e) {
-      return Left(AppFailure(serExcep.defaultExcep + e.toString()));
+      return Left(AppFailure('${serExcep.defaultExcep} ${e.toString()}'));
     }
   }
 }

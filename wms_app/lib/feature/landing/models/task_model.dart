@@ -17,30 +17,6 @@ class TaskModel {
     required this.createdAt,
   });
 
-  factory TaskModel.fromJson(Map<String, dynamic> json) {
-    return TaskModel(
-      id: json['id'] ?? '',
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      priority: json['priority'] ?? '',
-      status: json['status'] ?? '',
-      dueDate: json['dueDate'] ?? '',
-      createdAt: json['createdAt'] ?? '',
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'description': description,
-      'priority': priority,
-      'status': status,
-      'due_date': dueDate,
-      'created_at': createdAt,
-    };
-  }
-
   TaskModel copyWith({
     String? id,
     String? title,
@@ -68,8 +44,8 @@ class TaskModel {
       'description': description,
       'priority': priority,
       'status': status,
-      'dueDate': dueDate,
-      'createdAt': createdAt,
+      'due_date': dueDate,
+      'created_at': createdAt,
     };
   }
 
@@ -80,14 +56,38 @@ class TaskModel {
       description: map['description'] ?? '',
       priority: map['priority'] ?? '',
       status: map['status'] ?? '',
-      dueDate: map['dueDate'] ?? '',
-      createdAt: map['createdAt'] ?? '',
+      dueDate: map['due_date'] ?? '',
+      createdAt: map['created_at'] ?? '',
     );
+  }
+
+  factory TaskModel.fromJson(json) {
+    return TaskModel(
+      id: json['id'] ?? '',
+      title: json['title'] ?? '',
+      description: json['description'] ?? '',
+      priority: json['priority'] ?? '',
+      status: json['status'] ?? '',
+      dueDate: json['due_date'] ?? '',
+      createdAt: json['created_at'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'priority': priority,
+      'status': status,
+      'due_date': dueDate,
+      'created_at': createdAt,
+    };
   }
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, title: $title, description: $description, priority: $priority, status: $status, dueDate: $dueDate, createdAt: $createdAt)';
+    return 'TaskModel(id: $id, title: $title, description: $description, priority: $priority, status: $status, due_date: $dueDate, created_at: $createdAt)';
   }
 
   @override
@@ -112,5 +112,17 @@ class TaskModel {
         status.hashCode ^
         dueDate.hashCode ^
         createdAt.hashCode;
+  }
+}
+
+class TaskResponse {
+  final List<TaskModel> data;
+
+  TaskResponse({required this.data});
+
+  factory TaskResponse.fromJson(dynamic json) {
+    var list = json as List;
+    List<TaskModel> taskList = list.map((i) => TaskModel.fromJson(i)).toList();
+    return TaskResponse(data: taskList);
   }
 }
