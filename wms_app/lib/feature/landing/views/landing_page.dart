@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:wms_app/core/widgets/card_large.dart';
+import 'package:wms_app/core/widgets/card_medium.dart';
 import 'package:wms_app/core/widgets/loader.dart';
 import 'package:wms_app/core/widgets/text_divider_widget.dart';
 import 'package:wms_app/feature/landing/viewmodels/landing_announce_view_model.dart';
@@ -16,22 +18,18 @@ class LandingPage extends ConsumerStatefulWidget {
 class _LandingPageState extends ConsumerState<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            TextDividerWidget(text: 'Goal'),
-            Flexible(fit: FlexFit.tight, flex: 3, child: taskBuilder(context)),
-            TextDividerWidget(text: 'News'),
-            Flexible(fit: FlexFit.tight, flex: 3, child: newsBuilder(context)),
-            TextDividerWidget(text: 'Announcement'),
-            Flexible(
-              fit: FlexFit.tight,
-              flex: 3,
-              child: announceBuilder(context),
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          TextDividerWidget(text: 'Tasks'),
+          taskBuilder(context),
+          TextDividerWidget(text: 'News'),
+          newsBuilder(context),
+          TextDividerWidget(text: 'Announcement'),
+          announceBuilder(context),
+        ],
       ),
     );
   }
@@ -48,72 +46,21 @@ class _LandingPageState extends ConsumerState<LandingPage> {
                 return Center(child: Text("No Task Available"));
               }
               return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final task = data[index];
-                  return Card(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 8),
-                          Text(
-                            task.title ?? 'No Title',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            task.description ?? 'No Description',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Due: ${task.dueDate}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              Chip(
-                                label: Text(task.priority ?? 'normal'),
-                                backgroundColor: _getPriorityColor(
-                                  task.priority,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                  return CardMedium(
+                    title: task.title ?? "",
+                    description: task.description ?? "",
+                    dueDate: task.dueDate ?? "",
+                    priority: task.priority ?? '',
                   );
                 },
               );
             },
           );
-  }
-
-  Color _getPriorityColor(String? priority) {
-    switch (priority?.toLowerCase()) {
-      case 'high':
-        return Colors.red.shade100;
-      case 'medium':
-        return Colors.orange.shade100;
-      case 'low':
-        return Colors.green.shade100;
-      default:
-        return Colors.grey.shade100;
-    }
   }
 
   Widget newsBuilder(BuildContext context) {
@@ -125,51 +72,18 @@ class _LandingPageState extends ConsumerState<LandingPage> {
             error: (error, st) => Center(child: Text(error.toString())),
             data: (data) {
               if (data.isEmpty) {
-                return Center(child: Text("No Task Available"));
+                return Center(child: Text("No News Available"));
               }
               return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final news = data[index];
-                  return Card(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 8),
-                          Text(
-                            news.title ?? 'No Title',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            news.description ?? 'No Description',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Due: ${news.dueDate}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                  return CardLarge(
+                    title: news.title ?? '',
+                    description: news.description ?? '',
+                    dueDate: news.dueDate ?? '',
                   );
                 },
               );
@@ -186,51 +100,18 @@ class _LandingPageState extends ConsumerState<LandingPage> {
             error: (error, st) => Center(child: Text(error.toString())),
             data: (data) {
               if (data.isEmpty) {
-                return Center(child: Text("No Task Available"));
+                return Center(child: Text("No Announcement Available"));
               }
               return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: data.length,
                 itemBuilder: (context, index) {
                   final announce = data[index];
-                  return Card(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    child: Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 8),
-                          Text(
-                            announce.title ?? 'No Title',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            announce.description ?? 'No Description',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Due: ${announce.dueDate}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                  return CardLarge(
+                    title: announce.title ?? "",
+                    description: announce.description ?? "",
+                    dueDate: announce.dueDate ?? "",
                   );
                 },
               );

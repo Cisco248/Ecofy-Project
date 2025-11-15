@@ -1,60 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:wms_app/core/constants/color.dart';
 
 class CardLarge extends StatelessWidget {
-  const CardLarge({
-    super.key,
-    required this.img,
-    required this.title,
-    required this.description,
-    this.child,
-  });
-
-  final ImageProvider img;
   final String title;
   final String description;
-  final Widget? child;
+  final String dueDate;
+
+  const CardLarge({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.dueDate,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 118,
-              height: 118,
-              decoration: BoxDecoration(
-                image: DecorationImage(image: img, fit: BoxFit.cover),
-                borderRadius: BorderRadius.circular(8),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.borderLight),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-            ),
-            const SizedBox(width: 16),
-            // Text Section
-            Expanded(
-              child: Column(
-                textBaseline: TextBaseline.ideographic,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    description,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                    textAlign: TextAlign.justify,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
+              SizedBox(height: 8),
+              Text(description, style: TextStyle(fontSize: 13)),
+              SizedBox(height: 4),
+              Text(
+                "Due Date: $dueDate",
+                style: TextStyle(color: Colors.blueAccent, fontSize: 12),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
