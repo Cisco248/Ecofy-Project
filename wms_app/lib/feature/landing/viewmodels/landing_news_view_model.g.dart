@@ -43,7 +43,7 @@ final class LandingNewsViewModelProvider
 }
 
 String _$landingNewsViewModelHash() =>
-    r'833a98d9ea18fc9140b089186973d07fb97405ea';
+    r'fb29a003963fb731ded39ad542e750eb584ff025';
 
 abstract class _$LandingNewsViewModel
     extends $Notifier<AsyncValue<List<NewsModel>>?> {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wms_app/core/constants/logo.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 import 'package:wms_app/utilities/services/notification_service.dart';
 import 'package:wms_app/utilities/services/validator.dart';
 import 'package:wms_app/core/widgets/divider_widget.dart';
@@ -110,7 +111,10 @@ class _SignupPageState extends ConsumerState<SignupPage> {
   @override
   Widget build(BuildContext context) {
     // Set logic for the Loading Screen
-    final isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
+    final isLoading = ref.watch(
+      authViewModelProvider.select((val) => val?.isLoading == true),
+    );
+    DebugPrint(isLoading, '[SIGN UP] View Status').log;
     // Set the Nevigate the Login Page when Submitted the form data
     // manage the page state using the authViewModelProvider
     ref.listen(authViewModelProvider, (_, next) {

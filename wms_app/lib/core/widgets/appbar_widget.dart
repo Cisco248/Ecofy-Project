@@ -1,44 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:wms_app/core/constants/font.dart';
+import 'package:wms_app/core/constants/color.dart';
 import 'package:wms_app/core/constants/logo.dart';
 
-class AppbarWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppbarWidget extends ConsumerWidget implements PreferredSizeWidget {
   const AppbarWidget({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppBar(
-      leading: Padding(
+      leading: Builder(
+        builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.menu),
+            color: AppColors.bgLight,
+            iconSize: 36,
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          );
+        },
+      ),
+      automaticallyImplyLeading: false,
+      leadingWidth: 80,
+      toolbarHeight: 75,
+      title: Padding(
         padding: const EdgeInsets.only(left: 16),
         child: SvgPicture.asset(whiteLogo),
       ),
-      leadingWidth: 90,
-      toolbarHeight: 75,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(right: 16.0),
+          padding: const EdgeInsets.only(right: 8.0),
           child: Row(
-            spacing: 10,
+            spacing: 2,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "",
-                    textAlign: TextAlign.end,
-                    style: AppTextStyles.appBarText.titleLarge,
-                  ),
-                  Text(
-                    '',
-                    textAlign: TextAlign.end,
-                    style: AppTextStyles.appBarText.titleMedium,
-                  ),
-                ],
+              IconButton(
+                onPressed: () {
+                  // ref.watch(currentUserProvider.notifier).logOut();
+                },
+                icon: Icon(Icons.logout),
+                color: AppColors.appBgLight,
+                iconSize: 28,
               ),
             ],
           ),

@@ -7,6 +7,7 @@ import 'package:wms_app/core/widgets/text_divider_widget.dart';
 import 'package:wms_app/feature/landing/viewmodels/landing_announce_view_model.dart';
 import 'package:wms_app/feature/landing/viewmodels/landing_news_view_model.dart';
 import 'package:wms_app/feature/landing/viewmodels/landing_task_view_model.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 class LandingPage extends ConsumerStatefulWidget {
   const LandingPage({super.key});
@@ -36,6 +37,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget taskBuilder(BuildContext context) {
     final landingTaskState = ref.watch(landingTaskViewModelProvider);
+    DebugPrint(landingTaskState, '[TASKS] View Status').log;
     return landingTaskState == null
         ? Center(child: Text('Error'))
         : landingTaskState.when(
@@ -65,6 +67,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget newsBuilder(BuildContext context) {
     final landingNewsState = ref.watch(landingNewsViewModelProvider);
+    DebugPrint(landingNewsState, '[NEWS] View Status').log;
     return landingNewsState == null
         ? Center(child: Text('Error'))
         : landingNewsState.when(
@@ -93,6 +96,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget announceBuilder(BuildContext context) {
     final landingAnnounceState = ref.watch(landingAnnounceViewModelProvider);
+    DebugPrint(landingAnnounceState, '[ANNOUNCEMENTS] View Status').log;
     return landingAnnounceState == null
         ? Center(child: Text('Error'))
         : landingAnnounceState.when(

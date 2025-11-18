@@ -5,6 +5,7 @@ import 'package:wms_app/core/widgets/error_card.dart';
 import 'package:wms_app/core/widgets/loader.dart';
 import 'package:wms_app/core/widgets/profile_card.dart';
 import 'package:wms_app/feature/profile/viewmodels/profile_view_model.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -12,6 +13,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileViewModelProvider);
+    DebugPrint(profileState, '[PROFILE] View Status').log;
     return Scaffold(
       body: SafeArea(
         child: profileState == null

@@ -4,6 +4,7 @@ import 'package:wms_app/utilities/helpers/app_failure.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/announce_model.dart';
 import 'package:wms_app/feature/landing/repository/landing_repository.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 part 'landing_announce_view_model.g.dart';
 
@@ -30,7 +31,7 @@ class LandingAnnounceViewModel extends _$LandingAnnounceViewModel {
         ),
         Right(value: final r) => state = AsyncValue.data(r),
       };
-
+      DebugPrint(val, '[ANNOUNCEMENT] ViewModel Status').log;
       return val.value;
     } catch (e) {
       Left(AppFailure('Error: $e'));

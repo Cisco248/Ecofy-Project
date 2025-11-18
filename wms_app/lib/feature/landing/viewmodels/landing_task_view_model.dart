@@ -3,6 +3,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/task_model.dart';
 import 'package:wms_app/feature/landing/repository/landing_repository.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 part 'landing_task_view_model.g.dart';
 
@@ -29,7 +30,7 @@ class LandingTaskViewModel extends _$LandingTaskViewModel {
         ),
         Right(value: final r) => state = AsyncValue.data(r),
       };
-
+      DebugPrint(val, '[TASKS] ViewModel Status').log;
       return val.value;
     } catch (e) {
       Exception('Error: $e');

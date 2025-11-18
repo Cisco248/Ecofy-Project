@@ -23,4 +23,6 @@ class AuthLocalRepository {
   }
 
   String? getToken() => _sharedPreferences.getString(_key);
+
+  Future<void> logOut() async => await _sharedPreferences.clear();
 }

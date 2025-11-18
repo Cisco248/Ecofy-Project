@@ -11,7 +11,7 @@ Widget TextCard(
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
     decoration: BoxDecoration(
-      border: Border.all(color: AppColors.borderLight),
+      border: Border.all(color: AppColors.borderLight, width: 1.5),
       borderRadius: BorderRadius.circular(8),
     ),
     clipBehavior: Clip.antiAlias,
@@ -32,7 +32,7 @@ Widget TextCard(
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 2),
               Text(
                 value.isNotEmpty ? value : 'Not provided',
                 textAlign: TextAlign.left,
