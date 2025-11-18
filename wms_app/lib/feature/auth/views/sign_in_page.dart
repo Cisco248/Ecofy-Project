@@ -42,7 +42,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final isLoading = ref.watch(
       authViewModelProvider.select((val) => val?.isLoading == true),
     );
-    DebugPrint(isLoading, '[SIGN IN] View Status').log;
+    DebugPrint(isLoading, '[SIGN IN] View Status').log();
     // Mange the State the using the authViewModelProvider
     ref.listen(authViewModelProvider, (_, next) {
       next?.when(

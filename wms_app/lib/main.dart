@@ -52,7 +52,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final currentUser = ref.watch(currentUserProvider);
     // Custom Debug logger
-    DebugPrint(currentUser, "Current User State").log();
+    DebugPrint(currentUser, "[CURRENT USER] Status").log();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

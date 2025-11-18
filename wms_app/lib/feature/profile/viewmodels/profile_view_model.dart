@@ -49,7 +49,7 @@ class ProfileViewModel extends _$ProfileViewModel {
           ),
           Right(value: final r) => _getSuccess(r),
         };
-        DebugPrint(val, "[PROFILE] ViewModel Status").log;
+        DebugPrint(val, "[PROFILE] ViewModel Status").log();
         return val.value;
       }
     } catch (e) {

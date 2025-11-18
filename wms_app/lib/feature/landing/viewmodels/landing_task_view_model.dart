@@ -30,7 +30,7 @@ class LandingTaskViewModel extends _$LandingTaskViewModel {
         ),
         Right(value: final r) => state = AsyncValue.data(r),
       };
-      DebugPrint(val, '[TASKS] ViewModel Status').log;
+      DebugPrint(val, '[TASKS] ViewModel Status').log();
       return val.value;
     } catch (e) {
       Exception('Error: $e');

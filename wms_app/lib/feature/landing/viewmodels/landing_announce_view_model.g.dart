@@ -48,7 +48,7 @@ final class LandingAnnounceViewModelProvider
 }
 
 String _$landingAnnounceViewModelHash() =>
-    r'51b3162eaebdc632c87b594003a2498a2a1c7e62';
+    r'4b2306d7e8b975000f266ccf9b6f3864294bdb16';
 
 abstract class _$LandingAnnounceViewModel
     extends $Notifier<AsyncValue<List<AnnounceModel>>?> {

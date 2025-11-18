@@ -43,7 +43,7 @@ class AuthRemoteRepository {
           jsonDecode(responseSignUp.body) as Map<String, dynamic>;
 
       if (responseSignUp.statusCode == 200) {
-        DebugPrint(userDecode, "[SIGN IN] API Status").log;
+        DebugPrint(userDecode, "[SIGN IN] API Status").log();
         return Right(UserModel.fromMap(userDecode));
       }
       return Left(AppFailure('Error: ${userDecode['detail']}'));
@@ -66,7 +66,7 @@ class AuthRemoteRepository {
       final userDec = jsonDecode(responseSignIn.body) as Map<String, dynamic>;
 
       if (responseSignIn.statusCode == 200) {
-        DebugPrint(userDec, "[SIGN IN] API Status").log;
+        DebugPrint(userDec, "[SIGN IN] API Status").log();
         return Right(
           UserModel.fromMap(userDec['user']).copyWith(token: userDec['token']),
         );

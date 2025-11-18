@@ -41,7 +41,7 @@ final class ProfileViewModelProvider
   }
 }
 
-String _$profileViewModelHash() => r'10ec78c78af4e4a0d805740fee846ac79bfa53d4';
+String _$profileViewModelHash() => r'c72f54c8564284afe87f66d78276060f3dcabfaf';
 
 abstract class _$ProfileViewModel extends $Notifier<AsyncValue<ProfileModel>?> {
   AsyncValue<ProfileModel>? build();

@@ -55,7 +55,7 @@ class LandingRepository {
 
       if (taskRes.statusCode == 200) {
         TaskResponse taskResponse = TaskResponse.fromJson(json);
-        DebugPrint(taskResponse.data, '[TASKS] Response Status').log;
+        DebugPrint(taskResponse.data, '[TASKS] Response Status').log();
         return Right(taskResponse.data);
       }
 
@@ -105,7 +105,7 @@ class LandingRepository {
 
       if (newsRes.statusCode == 200) {
         NewsResponse newsResponse = NewsResponse.fromJson(json);
-        DebugPrint(newsResponse.data, '[NEWS] Response Status').log;
+        DebugPrint(newsResponse.data, '[NEWS] Response Status').log();
         return Right(newsResponse.data);
       }
       return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));
@@ -155,7 +155,7 @@ class LandingRepository {
 
       if (announceRes.statusCode == 200) {
         AnnounceResponse announceRes = AnnounceResponse.fromJson(json);
-        DebugPrint(announceRes.data, '[ANNOUNCEMENT] Response Status').log;
+        DebugPrint(announceRes.data, '[ANNOUNCEMENT] Response Status').log();
         return Right(AnnounceResponse.fromJson(json).data);
       }
       return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));

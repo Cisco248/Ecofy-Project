@@ -43,7 +43,7 @@ final class LandingTaskViewModelProvider
 }
 
 String _$landingTaskViewModelHash() =>
-    r'c50ef724693f8ae3e00127c9f7b7e655e45a2837';
+    r'd13584c64424fd23214837766d552e4f2db03875';
 
 abstract class _$LandingTaskViewModel
     extends $Notifier<AsyncValue<List<TaskModel>>?> {

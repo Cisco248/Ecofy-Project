@@ -114,7 +114,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
     final isLoading = ref.watch(
       authViewModelProvider.select((val) => val?.isLoading == true),
     );
-    DebugPrint(isLoading, '[SIGN UP] View Status').log;
+    DebugPrint(isLoading, '[SIGN UP] View Status').log();
     // Set the Nevigate the Login Page when Submitted the form data
     // manage the page state using the authViewModelProvider
     ref.listen(authViewModelProvider, (_, next) {

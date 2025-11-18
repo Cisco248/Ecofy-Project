@@ -26,7 +26,7 @@ class ProfileRemoteRepository {
       final userDecode = jsonDecode(responeGetDta.body) as Map<String, dynamic>;
 
       if (responeGetDta.statusCode == 200) {
-        DebugPrint(userDecode, "[PROFILE] Response Status").log;
+        DebugPrint(userDecode, "[PROFILE] Response Status").log();
         return Right(ProfileModel.fromMap(userDecode));
       }
 

@@ -13,7 +13,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState = ref.watch(profileViewModelProvider);
-    DebugPrint(profileState, '[PROFILE] View Status').log;
+    DebugPrint(profileState, '[PROFILE] View Status').log();
     return Scaffold(
       body: SafeArea(
         child: profileState == null

@@ -15,6 +15,7 @@ class DebugPrint {
     if (v == null) return true;
     if (v is String) return v.trim().isEmpty;
     if (v is Iterable || v is Map) return v.isEmpty;
+    if (v is List) return v.isEmpty;
     return false;
   }
 }

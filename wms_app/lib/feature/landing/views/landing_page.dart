@@ -37,7 +37,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget taskBuilder(BuildContext context) {
     final landingTaskState = ref.watch(landingTaskViewModelProvider);
-    DebugPrint(landingTaskState, '[TASKS] View Status').log;
+    DebugPrint(landingTaskState, '[TASKS] View Status').log();
     return landingTaskState == null
         ? Center(child: Text('Error'))
         : landingTaskState.when(
@@ -67,7 +67,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget newsBuilder(BuildContext context) {
     final landingNewsState = ref.watch(landingNewsViewModelProvider);
-    DebugPrint(landingNewsState, '[NEWS] View Status').log;
+    DebugPrint(landingNewsState, '[NEWS] View Status').log();
     return landingNewsState == null
         ? Center(child: Text('Error'))
         : landingNewsState.when(
@@ -96,7 +96,7 @@ class _LandingPageState extends ConsumerState<LandingPage> {
 
   Widget announceBuilder(BuildContext context) {
     final landingAnnounceState = ref.watch(landingAnnounceViewModelProvider);
-    DebugPrint(landingAnnounceState, '[ANNOUNCEMENTS] View Status').log;
+    DebugPrint(landingAnnounceState, '[ANNOUNCEMENTS] View Status').log();
     return landingAnnounceState == null
         ? Center(child: Text('Error'))
         : landingAnnounceState.when(

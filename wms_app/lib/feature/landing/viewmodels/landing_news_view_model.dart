@@ -30,7 +30,7 @@ class LandingNewsViewModel extends _$LandingNewsViewModel {
         ),
         Right(value: final r) => state = AsyncValue.data(r),
       };
-      DebugPrint(val, '[NEWS] ViewModel Status').log;
+      DebugPrint(val, '[NEWS] ViewModel Status').log();
       return val.value;
     } catch (e) {
       Left(AppFailure('Error: $e'));

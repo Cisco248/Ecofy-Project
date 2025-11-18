@@ -31,7 +31,7 @@ class LandingAnnounceViewModel extends _$LandingAnnounceViewModel {
         ),
         Right(value: final r) => state = AsyncValue.data(r),
       };
-      DebugPrint(val, '[ANNOUNCEMENT] ViewModel Status').log;
+      DebugPrint(val, '[ANNOUNCEMENT] ViewModel Status').log();
       return val.value;
     } catch (e) {
       Left(AppFailure('Error: $e'));
