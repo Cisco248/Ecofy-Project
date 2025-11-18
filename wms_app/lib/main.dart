@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wms_app/core/providers/current_user_notifier.dart';
+import 'package:wms_app/core/providers/current_profile_notifier.dart';
 import 'package:wms_app/feature/auth/views/sign_in_page.dart';
 import 'package:wms_app/main_layout.dart';
 import 'package:wms_app/utilities/helpers/debug_print.dart';
@@ -50,7 +50,7 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.watch(currentUserProvider);
+    final currentUser = ref.watch(currentProfileProvider);
     // Custom Debug logger
     DebugPrint(currentUser, "[CURRENT USER] Status").log();
 

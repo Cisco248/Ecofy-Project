@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:wms_app/core/constants/color.dart';
 import 'package:wms_app/core/constants/logo.dart';
+import 'package:wms_app/core/providers/current_profile_notifier.dart';
 
 class AppbarWidget extends ConsumerWidget implements PreferredSizeWidget {
   const AppbarWidget({super.key});
@@ -40,7 +41,7 @@ class AppbarWidget extends ConsumerWidget implements PreferredSizeWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  // ref.watch(currentUserProvider.notifier).logOut();
+                  ref.refresh(currentProfileProvider.notifier).logOut();
                 },
                 icon: Icon(Icons.logout),
                 color: AppColors.appBgLight,

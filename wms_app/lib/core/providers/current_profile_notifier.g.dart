@@ -42,7 +42,7 @@ final class CurrentProfileNotifierProvider
 }
 
 String _$currentProfileNotifierHash() =>
-    r'dbeae7b76bdc92f7e04fdbdaf8d0e1f462a4a565';
+    r'e93b26839c86340029f9cced13c824b2272abcbb';
 
 abstract class _$CurrentProfileNotifier extends $Notifier<ProfileModel?> {
   ProfileModel? build();

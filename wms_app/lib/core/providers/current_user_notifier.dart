@@ -13,11 +13,4 @@ class CurrentUserNotifier extends _$CurrentUserNotifier {
   void addUser(UserModel user) {
     state = user;
   }
-
-  // void logOut() {
-  //   state = null;
-  //   if (kDebugMode) {
-  //     print(state);
-  //   }
-  // }
 }

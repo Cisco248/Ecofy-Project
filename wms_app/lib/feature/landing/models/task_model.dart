@@ -1,3 +1,5 @@
+// ignore_for_file: strict_top_level_inference
+
 class TaskModel {
   String? id;
   String? title;
