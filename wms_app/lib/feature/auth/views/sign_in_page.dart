@@ -5,6 +5,7 @@ import 'package:wms_app/core/constants/font.dart';
 import 'package:wms_app/core/constants/size.dart';
 import 'package:wms_app/core/constants/text.dart';
 import 'package:wms_app/main_layout.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 import 'package:wms_app/utilities/services/notification_service.dart';
 import 'package:wms_app/utilities/services/validator.dart';
 import 'package:wms_app/core/widgets/custom_button.dart';
@@ -38,7 +39,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   @override
   Widget build(BuildContext context) {
     // import the authViewModelProvider for the page, setup the State using Provider
-    final isLoading = ref.watch(authViewModelProvider)?.isLoading == true;
+    final isLoading = ref.watch(
+      authViewModelProvider.select((val) => val?.isLoading == true),
+    );
+    DebugPrint(isLoading, '[SIGN IN] View Status').log();
     // Mange the State the using the authViewModelProvider
     ref.listen(authViewModelProvider, (_, next) {
       next?.when(
@@ -139,6 +143,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 userEmail: _emailController.text,
                                 userPassword: _passwordController.text,
                               );
+                        } else {
+                          NotificationService.instance.show(
+                            context: context,
+                            message: "Valadation Failed, Try Again!",
+                            type: NotificationType.error,
+                          );
                         }
                       },
                     ),

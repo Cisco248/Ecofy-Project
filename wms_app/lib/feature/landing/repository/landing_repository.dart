@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/foundation.dart';
 import 'package:wms_app/core/constants/text.dart';
 import 'package:wms_app/core/constants/server.dart';
 import 'package:wms_app/utilities/helpers/app_failure.dart';
@@ -10,6 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/feature/landing/models/news_model.dart';
 import 'package:wms_app/feature/landing/models/task_model.dart';
 import 'package:wms_app/feature/landing/models/announce_model.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 part 'landing_repository.g.dart';
 
@@ -55,12 +55,7 @@ class LandingRepository {
 
       if (taskRes.statusCode == 200) {
         TaskResponse taskResponse = TaskResponse.fromJson(json);
-
-        if (kDebugMode) {
-          print('Tasks Length: ${taskResponse.data.length}');
-          print('Task List: ${taskResponse.data}');
-        }
-
+        DebugPrint(taskResponse.data, '[TASKS] Response Status').log();
         return Right(taskResponse.data);
       }
 
@@ -110,12 +105,7 @@ class LandingRepository {
 
       if (newsRes.statusCode == 200) {
         NewsResponse newsResponse = NewsResponse.fromJson(json);
-
-        if (kDebugMode) {
-          print('News Length: ${newsResponse.data.length}');
-          print('News List: ${newsResponse.data}');
-        }
-
+        DebugPrint(newsResponse.data, '[NEWS] Response Status').log();
         return Right(newsResponse.data);
       }
       return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));
@@ -164,13 +154,8 @@ class LandingRepository {
       final json = jsonDecode(announceRes.body);
 
       if (announceRes.statusCode == 200) {
-        if (kDebugMode) {
-          print(
-            'Announce Length: ${AnnounceResponse.fromJson(json).data.length}',
-          );
-          print('Announce List: ${AnnounceResponse.fromJson(json).data}');
-        }
-
+        AnnounceResponse announceRes = AnnounceResponse.fromJson(json);
+        DebugPrint(announceRes.data, '[ANNOUNCEMENT] Response Status').log();
         return Right(AnnounceResponse.fromJson(json).data);
       }
       return Left(AppFailure('${serExcep.defaultExcep} ${json['detail']}'));

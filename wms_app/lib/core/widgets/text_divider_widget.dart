@@ -7,11 +7,16 @@ class TextDividerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-      child: Text(
-        text,
-        textAlign: TextAlign.start,
-        style: Theme.of(context).textTheme.displaySmall,
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+      child: Row(
+        children: [
+          Text(
+            text,
+            textAlign: TextAlign.left,
+            style: Theme.of(context).textTheme.displaySmall,
+          ),
+          IconButton(onPressed: () {}, icon: Icon(Icons.navigate_next)),
+        ],
       ),
     );
   }

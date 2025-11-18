@@ -37,7 +37,7 @@ class ServerConstant {
   ///   print('Request failed: $e');
   /// }
   /// ```
-  static serverGet(String endPoint) async {
+  static Future<void> serverGet(String endPoint) async {
     await http.get(
       Uri.parse('${ServerConstant.serverURL}/$endPoint'),
       headers: ServerConstant.getHeaders(),

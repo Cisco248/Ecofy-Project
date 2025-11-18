@@ -16,11 +16,13 @@ class AuthLocalRepository {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  setToken(String? token) async {
+  Future<void> setToken(String? token) async {
     if (token != null) {
       await _sharedPreferences.setString(_key, token);
     }
   }
 
   String? getToken() => _sharedPreferences.getString(_key);
+
+  Future<void> logOut() async => await _sharedPreferences.clear();
 }

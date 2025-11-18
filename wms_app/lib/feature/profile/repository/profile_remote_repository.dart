@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:fpdart/fpdart.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:wms_app/core/constants/server.dart';
 import 'package:wms_app/feature/profile/models/profile_model.dart';
 import 'package:wms_app/utilities/helpers/app_failure.dart';
+import 'package:wms_app/utilities/helpers/debug_print.dart';
 
 part 'profile_remote_repository.g.dart';
 
@@ -25,20 +25,13 @@ class ProfileRemoteRepository {
 
       final userDecode = jsonDecode(responeGetDta.body) as Map<String, dynamic>;
 
-      if (responeGetDta.statusCode != 200) {
-        // throw TimeoutException('Time Out Error: $userDecode');
-        return Left(AppFailure("Error: $userDecode"));
+      if (responeGetDta.statusCode == 200) {
+        DebugPrint(userDecode, "[PROFILE] Response Status").log();
+        return Right(ProfileModel.fromMap(userDecode));
       }
 
-      // if (kDebugMode) {
-      //   debugPrint("Reponse: $userDecode");
-      // }
-
-      return Right(ProfileModel.fromMap(userDecode));
+      return Left(AppFailure("Error: $userDecode"));
     } catch (e) {
-      if (kDebugMode) {
-        debugPrint('Error: ${e.toString()}');
-      }
       return Left(AppFailure('Error: ${e.toString()}'));
     }
   }
