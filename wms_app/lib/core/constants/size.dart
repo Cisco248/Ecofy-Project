@@ -37,6 +37,13 @@ class AppSizeStyle {
 
   static double locateBottomWidth(BuildContext context) =>
       MediaQuery.of(context).size.width;
+
+  // Locate Top Sizes
+  static double locateTopHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height * 3 / 5 - 10;
+
+  static double locateTopWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 }
 
 class IconSize {
