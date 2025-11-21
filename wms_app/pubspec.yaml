@@ -17,11 +17,11 @@ dependencies:
   flutter_riverpod: ^3.0.3
   riverpod_annotation: ^3.0.3
   shared_preferences: ^2.5.3
-  flutter_map: ^8.2.2
-  latlong2: ^0.9.1
   http: ^1.6.0
   font_awesome_flutter: ^10.12.0
-  location: ^8.0.1
+  google_maps_flutter: ^2.14.0
+  permission_handler: ^12.0.1
+  flutter_native_splash: ^2.4.7
   
 
 dev_dependencies:
@@ -59,3 +59,9 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: lib/core/assets/images/splash.png
+  fullscreen: true

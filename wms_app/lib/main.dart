@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:wms_app/core/providers/current_profile_notifier.dart';
 import 'package:wms_app/feature/auth/views/sign_in_page.dart';
+import 'package:wms_app/feature/discover/viewmodel/discover_view_model.dart';
 import 'package:wms_app/main_layout.dart';
 import 'package:wms_app/utilities/helpers/debug_print.dart';
 import 'package:wms_app/utilities/themes/theme.dart';
@@ -12,7 +14,8 @@ import 'package:wms_app/feature/landing/viewmodels/landing_task_view_model.dart'
 import 'package:wms_app/feature/landing/viewmodels/landing_announce_view_model.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   // get the access for the ref.read method using the ProviderContainer()
   final container = ProviderContainer();
   final authContainer = container.read(authViewModelProvider.notifier);
@@ -37,6 +40,9 @@ void main() async {
   );
   await landingAnnounceContainer.getAnnounceData();
 
+  final discoverContainer = container.read(discoverViewModelProvider.notifier);
+  await discoverContainer.getLocation();
+
   // After set the container into the UncontrolledProviderScope() instance
   runApp(UncontrolledProviderScope(container: container, child: const MyApp()));
 }
@@ -48,6 +54,17 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    splashInitialization();
+  }
+
+  void splashInitialization() async {
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
+  }
+
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(currentProfileProvider);

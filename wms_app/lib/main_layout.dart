@@ -7,7 +7,7 @@ import 'package:wms_app/core/pages/setting.dart';
 import 'package:wms_app/core/pages/support.dart';
 import 'package:wms_app/core/widgets/appbar_widget.dart';
 import 'package:wms_app/core/widgets/navbar_widget.dart';
-import 'package:wms_app/feature/discover/views/locate_page.dart';
+import 'package:wms_app/feature/discover/views/discover_page.dart';
 import 'package:wms_app/feature/profile/views/profile_page.dart';
 import 'package:wms_app/feature/token/views/token_page.dart';
 import 'feature/landing/views/landing_page.dart';
@@ -20,7 +20,7 @@ Widget navigationLink() {
     case 0:
       return LandingPage();
     case 1:
-      return LocateBinPage();
+      return DiscoverPage();
     case 2:
       return TokenGeneratePage();
     case 3:
