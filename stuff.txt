@@ -250,3 +250,121 @@
   //     return Left('An unexpected error occurred: $e');
   //   }
   // }
+
+  @REM @echo off
+@REM title GOV_APP DEV RUNNER [ WINDOWS ]
+@REM setlocal ENABLEDELAYEDEXPANSION
+
+@REM rem ==========================================
+@REM rem Variables
+@REM rem ==========================================
+
+@REM set RED=[31m
+@REM set GREEN=[32m
+@REM set YELLOW=[33m
+@REM set NC=[0m
+
+@REM rem ==========================================
+@REM rem FUNCTIONS
+@REM rem ==========================================
+
+@REM :print_info
+@REM echo %GREEN%[INFO]%NC% %*
+@REM goto :eof
+
+@REM :print_warning
+@REM echo %YELLOW%[WARNING]%NC% %*
+@REM goto :eof
+
+@REM :print_error
+@REM echo %RED%[ERROR]%NC% %*
+@REM goto :eof
+
+@REM rem ===========================================
+@REM rem CONFIGURATION
+@REM rem ===========================================
+
+@REM set APP_DIR=wms_app
+@REM set SERVER_DIR=server
+@REM set SERVER_MAIN=main.py
+@REM set SERVER_PORT=8000
+
+@REM rem ===========================================
+@REM rem CHECK INSTALLATIONS
+@REM rem ===========================================
+
+@REM where flutter >nul 2>nul
+@REM IF %ERRORLEVEL% NEQ 0 (
+@REM  call :print_error "Flutter is not installed"
+@REM  exit /b
+@REM )
+
+@REM where python >nul 2>nul
+@REM IF %ERRORLEVEL% NEQ 0 (
+@REM  call :print_error "Python is not installed"
+@REM  exit /b
+@REM )
+
+@REM call :print_info "Tools Detected"
+
+@REM rem ===========================================
+@REM rem START SERVER
+@REM rem ===========================================
+
+@REM call :print_info "STARTING SERVER FROM PORT 8000"
+@REM pushd "%SERVER_DIR%"
+
+@REM @REM rem Detect virtual environment
+@REM @REM IF EXIST venv\Scripts\activate.bat (
+@REM @REM  call :print_info "Activating venv..."
+@REM @REM  call venv\Scripts\activate.bat
+@REM @REM ) ELSE IF EXIST .venv\Scripts\activate.bat (
+@REM @REM  call :print_info "Activating .venv..."
+@REM @REM  call .venv\Scripts\activate.bat
+@REM @REM ) ELSE (
+@REM @REM  call :print_warning "No virtual environment found. Using system Python."
+@REM @REM )
+
+
+@REM start "FASTAPI" python -m uvicorn %SERVER_MAIN:~0,-3%:app --reload --host 0.0.0.0 --port %SERVER_PORT%
+@REM call :print_info "FastAPI running at http://localhost:%SERVER_PORT%"
+
+@REM popd
+
+@REM rem WAIT TIMER
+@REM timeout /t 2 >nul
+
+@REM rem ================================
+@REM rem START APPLICATION
+@REM rem ================================
+
+@REM call :print_info "START APPLICATION"
+@REM pushd "%APP_DIR%"
+
+@REM @REM flutter pub get
+
+@REM rem Get first device from flutter devices
+@REM for /f "tokens=2 delims=:," %%d in ('flutter devices --machine ^| findstr /i "id" ^| findstr /v "none"') do (
+@REM  set DEVICE=%%~d
+@REM  goto device_found
+@REM )
+
+@REM :device_found
+@REM IF "%DEVICE%"=="" (
+@REM  call :print_warning "No device detected. Starting Flutter normally."
+@REM  start "FLUTTER" cmd /c flutter run
+@REM ) ELSE (
+@REM  call :print_info "Using device: %DEVICE%"
+@REM  start "FLUTTER" cmd /c flutter run -d %DEVICE%
+@REM )
+
+@REM popd
+
+@REM call :print_error "Both services started. Close this window to stop."
+
+@REM rem ================================
+@REM rem WAIT FOREVER
+@REM rem ================================
+@REM :loop
+@REM timeout /t 5 >nul
+@REM goto loop
